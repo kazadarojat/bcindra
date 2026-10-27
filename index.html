@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform Belajar — Mekanisme Biokimia Sistem Indra</title>
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --bg:#070b16; --card:#101830; --card2:#141d3a; --line:#243055; --line2:#31406e;
+  --tx:#e6ebf7; --tx2:#9aa6c3; --tx3:#6b7694;
+  --acc:#38bdf8; --ok:#34d399; --bad:#f87171; --warn:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:
+    radial-gradient(1100px 560px at 75% -10%, #12204a 0%, transparent 60%),
+    radial-gradient(900px 520px at -10% 30%, #0e1b3d 0%, transparent 55%),
+    var(--bg);
+  color:var(--tx); min-height:100vh; line-height:1.55;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+/* ---------- header & nav ---------- */
+header.top{padding:26px 0 10px;text-align:center}
+.brand-badge{
+  display:inline-flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.12em;
+  font-size:12px;color:#8fb8ff;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.25);
+  padding:6px 14px;border-radius:999px;margin-bottom:12px
+}
+.brand-badge i{width:8px;height:8px;border-radius:50%;background:var(--ok);display:inline-block;
+  box-shadow:0 0 10px var(--ok)}
+header.top h1{font-size:clamp(24px,4vw,38px);font-weight:800;letter-spacing:-.5px}
+header.top h1 span{
+  background:linear-gradient(90deg,#7dd3fc,#a78bfa 45%,#f472b6);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+header.top .tag{color:var(--tx2);font-size:14px;margin-top:6px}
+nav.tabs{
+  position:sticky;top:0;z-index:50;background:rgba(7,11,22,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);margin-top:16px
+}
+nav.tabs .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;max-width:1180px;margin:0 auto;
+  scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+  border:1px solid var(--line);background:var(--card);color:var(--tx2);cursor:pointer;
+  font-size:13.5px;font-weight:600;transition:.2s;white-space:nowrap
+}
+.tab:hover{color:var(--tx);border-color:var(--line2);transform:translateY(-1px)}
+.tab.act{color:#fff;border-color:transparent}
+.tab .num{
+  width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;background:var(--line);color:var(--tx2)
+}
+.tab.act{box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.tab.act .num{background:rgba(255,255,255,.25);color:#fff}
+/* ---------- home ---------- */
+.hero{
+  margin:26px 0 18px;border:1px solid var(--line2);border-radius:22px;padding:30px 30px 26px;
+  background:
+    radial-gradient(600px 220px at 85% 0%, rgba(167,139,250,.14), transparent 60%),
+    radial-gradient(500px 220px at 10% 100%, rgba(56,189,248,.12), transparent 60%),
+    linear-gradient(180deg,#111a34,#0d1428);
+}
+.hero h2{font-size:clamp(21px,3vw,30px);font-weight:800;letter-spacing:-.4px}
+.hero p{color:var(--tx2);max-width:760px;margin-top:8px}
+.feat{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.feat span{font-size:13px;color:#cfe3ff;border:1px solid rgba(125,211,252,.3);
+  background:rgba(56,189,248,.07);padding:6px 12px;border-radius:999px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:18px 0}
+.pcard{
+  position:relative;border:1px solid var(--line);border-radius:18px;padding:18px;cursor:pointer;
+  background:linear-gradient(180deg,var(--card2),#0e1526);transition:.22s;overflow:hidden;
+  text-align:left;color:var(--tx);font-family:inherit
+}
+.pcard:hover{transform:translateY(-4px);border-color:var(--pc,#3b4a78);
+  box-shadow:0 14px 34px rgba(0,0,0,.45), 0 0 0 1px var(--pc,#3b4a78) inset}
+.pcard .n{
+  width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:15px;color:#0b1020;margin-bottom:12px;background:var(--pc,#7dd3fc)
+}
+.pcard h3{font-size:16.5px;font-weight:700}
+.pcard .sub{color:var(--tx2);font-size:12.5px;margin-top:2px}
+.pcard .mini{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.pcard .mini b{font-size:10px;font-weight:700;color:var(--tx2);background:rgba(255,255,255,.05);
+  border:1px solid var(--line);padding:3px 7px;border-radius:6px;letter-spacing:.03em}
+.pcard .go{margin-top:14px;font-size:12.5px;font-weight:700;color:var(--pc,#7dd3fc)}
+.qcard{
+  grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:18px;
+  border:1px solid rgba(167,139,250,.4);border-radius:18px;padding:20px 22px;cursor:pointer;
+  background:radial-gradient(400px 160px at 90% 20%, rgba(167,139,250,.16), transparent 60%),linear-gradient(180deg,#141d3a,#101830);
+  transition:.22s;text-align:left;color:var(--tx);font-family:inherit
+}
+.qcard:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.qcard h3{font-size:18px}
+.qcard p{color:var(--tx2);font-size:13.5px;margin-top:4px}
+.qbadge{
+  width:52px;height:52px;border-radius:16px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#a78bfa,#f472b6);color:#0b1020;font-weight:800;font-size:18px
+}
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:30px}
+.tip{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:rgba(255,255,255,.02)}
+.tip b{display:block;font-size:13.5px;margin-bottom:4px}
+.tip p{font-size:12.5px;color:var(--tx2)}
+/* ---------- materi ---------- */
+.materi-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:22px 0 12px}
+.mh-badge{
+  width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:20px;color:#0b1020;background:var(--pc,#7dd3fc)
+}
+.materi-head h2{font-size:clamp(19px,2.6vw,26px);font-weight:800}
+.materi-head .sub{color:var(--tx2);font-size:13px}
+.materi-head .spacer{flex:1}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 2px;scrollbar-width:thin}
+.chip{
+  flex:0 0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10.5px;
+  font-weight:700;letter-spacing:.02em;padding:6px 10px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--line);color:var(--tx3);background:rgba(255,255,255,.02);transition:.2s
+}
+.chip.done{color:var(--tx2)}
+.chip.act{color:#0b1020;background:var(--pc,#7dd3fc);border-color:var(--pc,#7dd3fc)}
+.materi-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,1fr);gap:16px}
+.stage{
+  border:1px solid var(--line2);border-radius:18px;overflow:hidden;position:relative;
+  background:
+    radial-gradient(500px 300px at 80% 10%, rgba(56,189,248,.06), transparent 60%),
+    linear-gradient(180deg,#0b1224,#080d1a);
+}
+.stage::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(148,163,184,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(148,163,184,.05) 1px,transparent 1px);
+  background-size:36px 36px
+}
+.stage svg{display:block;width:100%;height:auto;position:relative}
+.controls{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.cbtn{
+  width:42px;height:42px;border-radius:12px;border:1px solid var(--line2);background:var(--card);
+  color:var(--tx);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.18s
+}
+.cbtn:hover{border-color:var(--pc,#7dd3fc);transform:translateY(-1px)}
+.cbtn svg{width:18px;height:18px;fill:currentColor}
+.cbtn.wide{width:auto;padding:0 14px;font-weight:700;font-size:13px}
+.cbtn.play{background:var(--pc,#7dd3fc);color:#0b1020;border-color:var(--pc,#7dd3fc)}
+.prog{flex:1;min-width:120px;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.prog-bar{height:100%;width:0%;border-radius:99px;background:var(--pc,#7dd3fc);transition:width .4s}
+.prog-txt{font-size:12px;color:var(--tx2);font-weight:700;min-width:44px;text-align:right}
+.panel{border:1px solid var(--line);border-radius:18px;padding:20px;background:linear-gradient(180deg,var(--card2),#0e1526);
+  display:flex;flex-direction:column}
+.p-badge{
+  align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.08em;padding:5px 10px;border-radius:7px;
+  color:#0b1020;background:var(--pc,#7dd3fc);margin-bottom:12px
+}
+.panel h3{font-size:18px;font-weight:800;letter-spacing:-.2px}
+.panel .desc{color:var(--tx2);font-size:13.5px;margin-top:8px;min-height:84px}
+ol.steps{list-style:none;margin-top:14px;max-height:230px;overflow:auto;scrollbar-width:thin}
+ol.steps li{
+  display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:10px;cursor:pointer;
+  font-size:12.5px;color:var(--tx3);transition:.18s;border:1px solid transparent
+}
+ol.steps li i{font-style:normal;font-weight:800;font-size:10.5px;min-width:18px;height:18px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;background:var(--line);color:var(--tx2)}
+ol.steps li.done{color:var(--tx2)}
+ol.steps li.done i{background:rgba(255,255,255,.14)}
+ol.steps li.act{color:#fff;border-color:var(--pc,#7dd3fc);background:rgba(255,255,255,.04)}
+ol.steps li.act i{background:var(--pc,#7dd3fc);color:#0b1020}
+.info-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin:18px 0 40px}
+.icard{border:1px solid var(--line);border-radius:18px;padding:20px;background:linear-gradient(180deg,var(--card2),#0e1526)}
+.icard h4{font-size:14px;font-weight:800;letter-spacing:.04em;color:var(--pc,#7dd3fc);margin-bottom:10px}
+.icard p,.icard li{font-size:13.5px;color:var(--tx2)}
+.icard ul{list-style:none;margin-top:2px}
+.icard li{padding:6px 0 6px 22px;position:relative;border-bottom:1px dashed rgba(148,163,184,.12)}
+.icard li:last-child{border-bottom:none}
+.icard li::before{content:"";position:absolute;left:4px;top:13px;width:8px;height:8px;border-radius:2px;
+  background:var(--pc,#7dd3fc);opacity:.85}
+.formula-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px}
+.formula-flow b{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;padding:5px 9px;border-radius:7px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);color:#cfe0ff;font-weight:700}
+.formula-flow i{color:var(--pc,#7dd3fc);font-style:normal;font-weight:800}
+.mini-quiz-cta{
+  margin-top:14px;width:100%;padding:11px;border-radius:12px;border:1px dashed var(--pc,#7dd3fc);
+  background:rgba(255,255,255,.03);color:var(--tx);font-weight:700;font-size:13px;cursor:pointer;transition:.2s;font-family:inherit
+}
+.mini-quiz-cta:hover{background:rgba(255,255,255,.06)}
+/* ---------- SVG generic ---------- */
+svg text{font-family:"Segoe UI",system-ui,Arial,sans-serif}
+.hl{opacity:.2;transition:opacity .45s ease}
+.hl.on{opacity:1;filter:drop-shadow(0 0 5px var(--pc,#7dd3fc)) drop-shadow(0 0 14px rgba(125,211,252,.35))}
+.hl.done{opacity:.75;filter:none}
+.sw{transition:opacity .5s ease}
+.mv{opacity:0}
+.pg{transform-box:fill-box;transform-origin:center;animation:svgPulse .9s ease}
+@keyframes svgPulse{0%{transform:scale(1)}45%{transform:scale(1.16)}100%{transform:scale(1)}}
+/* ---------- quiz ---------- */
+.qz-card{max-width:780px;margin:26px auto 50px;border:1px solid var(--line2);border-radius:22px;
+  padding:28px;background:linear-gradient(180deg,#111a34,#0d1428)}
+.qz-card h2{font-size:22px;font-weight:800}
+.qz-card .lead{color:var(--tx2);font-size:14px;margin-top:6px}
+.qz-start-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:13px;border:none;cursor:pointer;
+  font-weight:700;font-size:14px;font-family:inherit;transition:.2s;color:#0b1020;
+  background:linear-gradient(135deg,#7dd3fc,#a78bfa)
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(56,189,248,.25)}
+.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--line2)}
+.btn.ghost:hover{border-color:var(--acc)}
+.qz-mini{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.qz-mini button{
+  font-size:12px;font-weight:700;padding:7px 12px;border-radius:9px;cursor:pointer;font-family:inherit;
+  border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--tx2);transition:.18s
+}
+.qz-mini button:hover{color:var(--tx);border-color:var(--acc)}
+.qz-best{margin-top:18px;font-size:12.5px;color:var(--tx3)}
+.qz-prog{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0 18px}
+.qz-prog div{height:100%;background:linear-gradient(90deg,#7dd3fc,#a78bfa);width:0%;transition:width .4s}
+.qz-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--tx3);font-weight:700}
+.qz-tag{font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:4px 9px;border-radius:6px;
+  background:rgba(167,139,250,.15);color:#c4b5fd;border:1px solid rgba(167,139,250,.35)}
+.qz-q{font-size:17px;font-weight:700;margin:14px 0 16px;letter-spacing:-.2px}
+.qz-opts{display:flex;flex-direction:column;gap:9px}
+.qz-opt{
+  display:flex;gap:12px;align-items:center;text-align:left;padding:13px 15px;border-radius:13px;cursor:pointer;
+  border:1px solid var(--line2);background:rgba(255,255,255,.02);color:var(--tx);font-size:13.5px;
+  font-family:inherit;transition:.16s
+}
+.qz-opt:hover:not(:disabled){border-color:var(--acc);background:rgba(56,189,248,.06)}
+.qz-opt .abc{
+  min-width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:12px;background:var(--line);color:var(--tx2)
+}
+.qz-opt:disabled{cursor:default}
+.qz-opt.ok{border-color:var(--ok);background:rgba(52,211,153,.1)}
+.qz-opt.ok .abc{background:var(--ok);color:#052018}
+.qz-opt.bad{border-color:var(--bad);background:rgba(248,113,113,.1)}
+.qz-opt.bad .abc{background:var(--bad);color:#2a0708}
+.qz-opt.dim{opacity:.45}
+.qz-fb{margin-top:14px;border-radius:12px;padding:13px 15px;font-size:13px;display:none}
+.qz-fb.show{display:block}
+.qz-fb.ok{border:1px solid rgba(52,211,153,.5);background:rgba(52,211,153,.08);color:#a7f3d0}
+.qz-fb.bad{border:1px solid rgba(248,113,113,.5);background:rgba(248,113,113,.08);color:#fecaca}
+.qz-next{margin-top:16px;text-align:right}
+.qz-res-score{font-size:52px;font-weight:800;letter-spacing:-2px;
+  background:linear-gradient(90deg,#7dd3fc,#a78bfa,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.qz-grade{display:inline-block;margin-top:6px;padding:7px 16px;border-radius:999px;font-weight:800;font-size:14px;
+  background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.45);color:#a7f3d0}
+.qz-wrong{margin-top:20px}
+.qz-wrong h4{font-size:13px;color:var(--tx2);margin-bottom:10px;letter-spacing:.04em}
+.qz-wrong .item{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px;font-size:12.5px;color:var(--tx2)}
+.qz-wrong .item b{color:var(--tx)}
+.qz-wrong .item em{color:#a7f3d0;font-style:normal}
+.qz-bar-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);margin-top:20px;padding:20px 18px 30px;text-align:center;
+  color:var(--tx3);font-size:12px}
+kbd{background:var(--line);border-radius:5px;padding:1px 6px;font-size:11px;color:var(--tx2);font-family:inherit}
+@media(max-width:960px){
+  .materi-grid,.info-grid{grid-template-columns:1fr}
+  ol.steps{max-height:none}
+  .hero{padding:22px 18px}
+}
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <div class="brand-badge"><i></i> BIOKIMIA INTERAKTIF</div>
+  <h1>Platform Belajar <span>Mekanisme Biokimia Sistem Indra</span></h1>
+  <p class="tag">Visualisasi 2D jalur sinyal saraf &bull; penjelasan langkah demi langkah &bull; kuis evaluasi otomatis</p>
+</header>
+
+<nav class="tabs"><div class="row" id="tabs"></div></nav>
+
+<main class="wrap">
+  <!-- ============ BERANDA ============ -->
+  <section id="view-home">
+    <div class="hero">
+      <h2>Jelajahi Enam Jalur Transduksi Sinyal Indra</h2>
+      <p>Dari foton cahaya yang mengubah bentuk retinal, getaran suara yang membengkokkan stereosilia, hingga molekul gula yang memicu pelepasan ATP — setiap jalur divisualisasikan sebagai animasi 2D yang dapat diputar langkah demi langkah, lengkap dengan penjelasan biokimianya, lalu diuji lewat kuis evaluasi otomatis.</p>
+      <div class="feat">
+        <span>Animasi transduksi 2D</span><span>Langkah bernomor + penjelasan</span>
+        <span>Rantai reaksi bisa diklik</span><span>Kuis otomatis + skor &amp; pembahasan</span><span>Berjalan offline, tanpa internet</span>
+      </div>
+    </div>
+    <div class="cards" id="homeCards"></div>
+    <div class="tips">
+      <div class="tip"><b>1. Buka satu jalur</b><p>Pilih jalur di tab atas. Baca ringkasan materi inti dan poin kunci di bagian bawah.</p></div>
+      <div class="tip"><b>2. Tekan Putar</b><p>Animasi berjalan otomatis; atau gunakan tombol langkah untuk maju/mundur sesuai ritmemu.</p></div>
+      <div class="tip"><b>3. Ikuti rantai reaksi</b><p>Chip di atas panggung menunjukkan posisi kaskade; komponen aktif bersinar di ilustrasi.</p></div>
+      <div class="tip"><b>4. Uji pemahaman</b><p>Kerjakan kuis campuran atau kuis per jalur. Skor, grade, dan pembahasan muncul otomatis.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ MATERI ============ -->
+  <section id="view-materi" hidden>
+    <div class="materi-head">
+      <div class="mh-badge" id="mhNum">01</div>
+      <div>
+        <h2 id="mhTitle">—</h2>
+        <div class="sub" id="mhSub">—</div>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn ghost" id="mhQuizBtn">Kuis jalur ini</button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="materi-grid">
+      <div>
+        <div class="stage" id="stage"></div>
+        <div class="controls">
+          <button class="cbtn" id="cPrev" title="Langkah sebelumnya (kiri)"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+          <button class="cbtn play" id="cPlay" title="Putar / Jeda (spasi)"></button>
+          <button class="cbtn" id="cNext" title="Langkah berikutnya (kanan)"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg></button>
+          <button class="cbtn" id="cReset" title="Ulangi dari awal"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg></button>
+          <button class="cbtn wide" id="cSpeed" title="Ubah kecepatan">1x</button>
+          <div class="prog"><div class="prog-bar" id="progBar"></div></div>
+          <div class="prog-txt" id="progTxt">0/0</div>
+        </div>
+        <p style="font-size:11.5px;color:var(--tx3);margin-top:8px">Pintasan: <kbd>&larr;</kbd> langkah sebelumnya &nbsp; <kbd>&rarr;</kbd> langkah berikutnya &nbsp; <kbd>Spasi</kbd> putar/jeda</p>
+      </div>
+      <aside class="panel">
+        <div class="p-badge" id="pBadge">IKHTISAR</div>
+        <h3 id="pLabel">Tekan Putar untuk memulai</h3>
+        <p class="desc" id="pDesc">Setiap komponen jalur akan menyala satu per satu mengikuti urutan kaskade biokimia. Gunakan daftar langkah di bawah untuk melompat ke tahap tertentu.</p>
+        <ol class="steps" id="pList"></ol>
+        <button class="mini-quiz-cta" id="miniQuizBtn">Uji pemahaman jalur ini (kuis cepat)</button>
+      </aside>
+    </div>
+    <div class="info-grid">
+      <div class="icard"><h4>MATERI INTI</h4><p id="iIntro"></p>
+        <div style="margin-top:14px"><h4 style="margin-bottom:8px">RANTAI REAKSI</h4><div class="formula-flow" id="iFormula"></div></div>
+      </div>
+      <div class="icard"><h4>POIN KUNCI</h4><ul id="iKeys"></ul></div>
+    </div>
+  </section>
+
+  <!-- ============ KUIS ============ -->
+  <section id="view-kuis" hidden>
+    <div class="qz-card" id="qzIntro">
+      <h2>Kuis Evaluasi Otomatis</h2>
+      <p class="lead">Soal dipilih acak, penilaian langsung beserta pembahasan. Mode campuran menguji keenam jalur sekaligus; mode per jalur cocok setelah kamu menuntaskan satu materi.</p>
+      <div class="qz-start-row">
+        <button class="btn" id="qzStartAll">Mulai Kuis Campuran — 10 Soal</button>
+      </div>
+      <div class="qz-mini" id="qzMiniRow"></div>
+      <div class="qz-best" id="qzBest"></div>
+    </div>
+    <div class="qz-card" id="qzQuiz" hidden>
+      <div class="qz-meta"><span id="qzNo">Soal 1/10</span><span class="qz-tag" id="qzTag">OPTIK</span></div>
+      <div class="qz-prog"><div id="qzBar"></div></div>
+      <div class="qz-q" id="qzQ">—</div>
+      <div class="qz-opts" id="qzOpts"></div>
+      <div class="qz-fb" id="qzFb"></div>
+      <div class="qz-next"><button class="btn" id="qzNext" hidden>Lanjut</button></div>
+    </div>
+    <div class="qz-card" id="qzResult" hidden>
+      <h2>Hasil Evaluasi</h2>
+      <div class="qz-res-score" id="qzScore">0</div>
+      <div class="qz-grade" id="qzGrade">—</div>
+      <div class="qz-wrong" id="qzWrong"></div>
+      <div class="qz-bar-row">
+        <button class="btn" id="qzRetry">Ulangi kuis (soal baru)</button>
+        <button class="btn ghost" id="qzHome">Kembali ke beranda</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Dibuat untuk pembelajaran Biokimia — Sistem Indra. Seluruh ilustrasi bersifat skematik (tidak sesuai skala). Berjalan sepenuhnya offline dalam satu file.</footer>
+<script>
+/* ============================================================
+   PLATFORM BELAJAR MEKANISME BIOKIMIA SISTEM INDRA
+   Satu file mandiri — visualisasi 2D + kuis evaluasi otomatis
+   ============================================================ */
+'use strict';
+const MKC={amb:'#fbbf24',red:'#f87171',grn:'#4ade80',cyn:'#22d3ee',vio:'#a78bfa',pnk:'#f472b6',org:'#fb923c',gry:'#94a3b8'};
+const DEFS='<defs>'+Object.keys(MKC).map(k=>`<marker id="mk-${k}" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="${MKC[k]}"/></marker>`).join('')+'</defs>';
+function T(x,y,s,o={}){return `<text x="${x}" y="${y}" font-size="${o.s||14}" fill="${o.f||'#aab3c8'}" text-anchor="${o.a||'middle'}" font-weight="${o.w||400}">${s}</text>`}
+function LN(x1,y1,x2,y2,c,w=2,d=''){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" ${d?`stroke-dasharray="${d}"`:''}/>`}
+function RC(x,y,w,h,rx,f,st,sw=2){return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${f}" ${st?`stroke="${st}" stroke-width="${sw}"`:''}/>`}
+function EL(cx,cy,rx,ry,f,st,sw=2,d=''){return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${f}" ${st?`stroke="${st}" stroke-width="${sw}" ${d?`stroke-dasharray="${d}"`:''}`:''}/>`}
+function HL(step,inner){return `<g class="hl" data-step="${step}">${inner}</g>`}
+function MV(id,inner){return `<g id="${id}" class="mv sw" style="opacity:0" transform="translate(-9999,-9999)">${inner}</g>`}
+function ION(c,t,r=12,fs=10){return `<circle r="${r}" fill="${c}"/>${t?`<text y="${r>10?4:3.5}" font-size="${fs}" text-anchor="middle" font-weight="700" fill="#0b1020">${t}</text>`:''}`}
+function PHOT(r=8){const q=r+5;return `<circle r="${r}" fill="#fde68a"/><g stroke="#fde68a" stroke-width="2" stroke-linecap="round"><line x1="${-q-5}" y1="0" x2="${-q}" y2="0"/><line x1="${q}" y1="0" x2="${q+5}" y2="0"/><line x1="0" y1="${-q-5}" x2="0" y2="${-q}"/><line x1="0" y1="${q}" x2="0" y2="${q+5}"/></g>`}
+function BOLT(){return `<polyline points="0,-16 -9,2 -1,2 -8,18" fill="none" stroke="#fde047" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`}
+function ARW(x1,y1,x2,y2,mid,w=2.5,d=''){const c=MKC[mid]||mid;return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" ${d?`stroke-dasharray="${d}"`:''} marker-end="url(#mk-${mid})"/>`}
+
+const PATHWAYS=[
+/* ================= 1. JALUR OPTIK ================= */
+{
+id:'optik',num:'01',name:'Jalur Optik',sub:'Transduksi cahaya di retina (sel batang)',color:'#fbbf24',
+formula:['CAHAYA','11-CIS-RETINAL','ALL-TRANS-RETINAL','FOTOPIGMEN AKTIF','TRANSDUCIN ↑','PDE ↑','cGMP ↓','KANAL KATION TERTUTUP','HIPERPOLARISASI','GLUTAMAT ↓'],
+intro:'Penglihatan dimulai ketika foton diserap rodopsin di disk segmen luar sel batang. Kromofor 11-cis-retinal diisomerisasi menjadi all-trans-retinal, mengaktifkan fotopigmen (metarodopsin II), yang lalu mengaktifkan protein G bernama transducin. Transducin mengaktifkan PDE, cGMP dipecah, kanal kation menutup, dan sel justru HIPERpolarisasi — kebalikan kebanyakan indra — sehingga pelepasan glutamat menurun.',
+keys:[
+ 'Satu-satunya indra yang merespons stimulus dengan hiperpolarisasi, bukan depolarisasi.',
+ 'Transducin = protein G khusus retina; jalur lain memakai Golf (hidung) atau gustducin (lidah).',
+ 'cGMP menjaga kanal kation (Na+/Ca2+) tetap terbuka dalam gelap; cahaya menurunkan cGMP.',
+ 'Semakin redup cahaya → glutamat tinggi; semakin terang → glutamat menurun (kode sinaptik).'
+],
+steps:[
+ {lb:'CAHAYA',ds:'Foton cahaya menembus kornea, lensa, dan humor vitreous lalu mencapai segmen luar sel batang di retina. Di sinilah transduksi cahaya dimulai.',hl:['o-ray'],fx:[['mv','m0',{pts:[[150,40],[468,148]],dur:900}]]},
+ {lb:'11-CIS-RETINAL',ds:'Di dalam disk segmen luar, pigmen visual rodopsin menangkap foton. Kromofornya, 11-cis-retinal, menyerap energi cahaya dan mulai goyah pada ikatan rangkap ke-11.',hl:['o-cis'],fx:[['pulse','o-cis']]},
+ {lb:'ALL-TRANS-RETINAL',ds:'Energi foton mengisomerisasi 11-cis-retinal menjadi all-trans-retinal — molekul melurus dan berubah bentuk. Inilah konversi sinyal cahaya menjadi perubahan kimia pertama.',hl:['o-trans'],fx:[['hide','o-cis'],['show','o-trans']]},
+ {lb:'FOTOPIGMEN AKTIF',ds:'Rodopsin yang menampung all-trans-retinal berubah konformasi menjadi metarodopsin II, yaitu fotopigmen aktif yang siap merangsang protein G di sekitarnya.',hl:['o-rho'],fx:[['pulse','o-rho']]},
+ {lb:'TRANSDUCIN AKTIF',ds:'Fotopigmen aktif memicu subunit α transducin (protein G khusus retina) menukar GDP dengan GTP. Subunit α-GTP lalu lepas dari kompleks βγ mencari targetnya.',hl:['o-g','o-glbl'],fx:[]},
+ {lb:'PDE AKTIF',ds:'α-GTP transducin mengaktifkan enzim fosfodiesterase (PDE) pada membran disk. Sakelar enzimatik kaskade visual kini menyala.',hl:['o-pde'],fx:[['pulse','o-pde']]},
+ {lb:'cGMP TURUN',ds:'PDE menghidrolisis cGMP menjadi 5\'-GMP sehingga kadar cGMP sitoplasma anjlok. Padahal cGMLah yang selama ini menjaga kanal kation tetap terbuka dalam gelap.',hl:['o-cgdn'],fx:[['hide','o-cg']]},
+ {lb:'KANAL KATION MENUTUP',ds:'Tanpa cGMP, kanal kation tergantung-cGMP (Na+ / Ca2+) menutup. Arus masuk ion positif yang berjalan terus-menerus di gelap kini berhenti.',hl:['o-ch','o-chlbl'],fx:[['pulse','o-x']]},
+ {lb:'HIPERPOLARISASI',ds:'Masukan kation berkurang sementara pompa tetap bekerja, sehingga potensial membran makin negatif: hiperpolarisasi. Perhatikan grafik Vm yang menurun — kebalikan kebanyakan indra.',hl:['o-graf'],fx:[['pulse','o-graf']]},
+ {lb:'GLUTAMAT TURUN',ds:'Hiperpolarisasi menekan buka kanal Ca2+ di terminal sinaptik, sehingga eksositosis vesikel glutamat menurun. Sel bipolar membaca penurunan glutamat ini sebagai sinyal "terang".',hl:['o-term','o-bip'],fx:[['mv','m9a',{pts:[[480,494],[480,530]],dur:700}],['mv','m9b',{pts:[[520,494],[520,530]],dur:700}]]}
+],
+scene(){
+ let discs='';for(let i=0;i<9;i++){const cy=104+i*22;discs+=EL(480,cy,100,9,'#131d3c','#2a3a66',1.6)}
+ let cg='';[[400,120],[430,200],[470,130],[510,230],[445,250],[530,120],[415,170]].forEach(p=>cg+=`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="#22d3ee" opacity=".9"/>`);
+ const out=`
+ ${HL(0,LN(120,26,430,150,'#fbbf24',3)+LN(170,18,470,132,'#fbbf24',3)+LN(220,26,510,150,'#fbbf24',3)+T(96,50,'Foton',{a:'start',s:14,f:'#fde68a',w:700})).replace('class="hl"','id="o-ray" class="hl"')}
+ ${RC(350,64,260,452,130,'#0e1730','#2c3a63',2.5)}
+ ${discs}
+ <g id="o-cis" class="hl" data-step="1"><path d="M455 170 l14 -12 l14 12 l14 -12" fill="none" stroke="#f59e0b" stroke-width="4.5" stroke-linecap="round"/>${T(480,146,'11-cis-retinal',{s:12,f:'#f59e0b',w:700})}</g>
+ <g id="o-trans" class="hl off" data-step="2"><path d="M448 170 L512 170 l8 -6" fill="none" stroke="#f87171" stroke-width="4.5" stroke-linecap="round"/>${T(480,146,'all-trans-retinal',{s:12,f:'#f87171',w:700})}</g>
+ ${HL(3,EL(480,170,116,21,'none','#fbbf24',2.5)+'<circle cx="480" cy="170" r="4" fill="#fbbf24"/>'+T(330,156,'Fotopigmen aktif',{a:'end',s:13,f:'#fbbf24',w:700})+LN(336,152,366,168,'#fbbf24',1.5,'4 3')).replace('class="hl"','id="o-rho" class="hl"')}
+ <g id="o-g" class="hl" data-step="4"><circle cx="600" cy="132" r="12" fill="#4ade80"/><text x="600" y="136" font-size="10" text-anchor="middle" font-weight="700" fill="#0b1020">α</text><circle cx="600" cy="164" r="10" fill="#60a5fa"/><text x="600" y="168" font-size="9" text-anchor="middle" font-weight="700" fill="#0b1020">βγ</text><text x="600" y="196" font-size="10" text-anchor="middle" fill="#4ade80" font-weight="700">GDP→GTP</text></g>
+ <g id="o-glbl" class="hl" data-step="4">${T(652,140,'Transducin',{a:'start',s:13,f:'#4ade80',w:700})+LN(614,136,648,136,'#4ade80',1.5)}</g>
+ ${HL(5,RC(556,214,46,30,10,'#f472b6')+`<text x="579" y="234" font-size="11" text-anchor="middle" font-weight="800" fill="#0b1020">PDE</text>`+T(330,232,'Fosfodiesterase',{a:'end',s:12,f:'#f472b6',w:700})+LN(338,228,552,228,'#f472b6',1.5,'4 3')).replace('class="hl"','id="o-pde" class="hl"')}
+ <g id="o-cg">${cg}${T(480,300,'cGMP intraseluler',{s:12,f:'#22d3ee',w:700})}</g>
+ ${HL(6,T(480,300,'cGMP ↓ dipecah PDE menjadi 5\'-GMP',{s:12.5,f:'#22d3ee',w:700})+ARW(579,250,500,282,'cyn',2.5)).replace('class="hl"','id="o-cgdn" class="hl"')}
+ <g id="o-ch" class="hl" data-step="7">${RC(340,300,18,44,4,'#33436f','#7dd3fc',2)+RC(602,300,18,44,4,'#33436f','#7dd3fc',2)}</g>
+ <g id="o-x" class="hl" data-step="7">${LN(340,312,358,332,'#f87171',3.5)+LN(358,312,340,332,'#f87171',3.5)+LN(602,312,620,332,'#f87171',3.5)+LN(620,312,602,332,'#f87171',3.5)}</g>
+ ${HL(7,T(480,366,'Kanal kation (Na+ / Ca2+) tertutup',{s:12,f:'#f87171',w:700})).replace('class="hl"','id="o-chlbl" class="hl"')}
+ ${HL(8,LN(80,380,80,500,'#64748b',2)+LN(80,500,260,500,'#64748b',2)+'<polyline points="80,400 112,400 144,400 176,478 254,478" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>'+T(170,522,'Hiperpolarisasi (Vm makin negatif)',{s:12,f:'#38bdf8',w:700})+T(66,396,'Vm',{a:'end',s:10,f:'#64748b'})).replace('class="hl"','id="o-graf" class="hl"')}
+ ${T(330,404,'Segmen dalam',{a:'end',s:12,f:'#64748b'})+T(330,120,'Segmen luar (disk)',{a:'end',s:12,f:'#64748b'})+LN(336,400,410,405,'#475569',1.2)}
+ ${EL(505,412,24,24,'#17224a','#3b4a78',2)+EL(438,410,16,9,'#1b2a55')}
+ <g id="o-term" class="hl" data-step="9">${RC(410,462,150,48,22,'#0f1a36','#3b4a78',2)+`<circle cx="432" cy="486" r="10" fill="#1f2b52" stroke="#3b4a78"/><text x="432" y="489" font-size="8" text-anchor="middle" fill="#cbd5e1">Glu</text><circle cx="480" cy="484" r="10" fill="#1f2b52" stroke="#3b4a78"/><text x="480" y="487" font-size="8" text-anchor="middle" fill="#cbd5e1">Glu</text><circle cx="528" cy="486" r="10" fill="#1f2b52" stroke="#3b4a78"/><text x="528" y="489" font-size="8" text-anchor="middle" fill="#cbd5e1">Glu</text>`+T(480,446,'Terminal sinaptik',{s:12,f:'#94a3b8'})}</g>
+ <g id="o-bip" class="hl" data-step="9">${T(712,512,'Glutamat ↓ — sinyal "terang" ke sel bipolar',{a:'start',s:12,f:'#34d399',w:700})+LN(700,508,545,500,'#34d399',1.5)}</g>
+ ${MV('m0',PHOT())}
+ ${MV('m9a',`<circle r="6" fill="#34d399"/>`)}
+ ${MV('m9b',`<circle r="6" fill="#34d399"/>`)}
+ `;
+ return {w:960,h:540,body:DEFS+out};
+}
+},
+/* ================= 2. JALUR INTEGUMEN ================= */
+{
+id:'integumen',num:'02',name:'Jalur Integumen',sub:'Termoreseptor panas kulit (TRPV)',color:'#fb923c',
+formula:['STIMULUS 40°','TERMORESEPTOR','KANAL TRPV TERBUKA','Na+ MASUK + Ca2+ MASUK','DEPOLARISASI','POTENSIAL AKSI'],
+intro:'Kulit (integumen) memakai ujung saraf bebas sebagai termoreseptor. Panas sekitar 40°C membuka kanal TRPV pada membrannya, sehingga Na+ dan Ca2+ mengalir masuk. Depolarisasi lokal mencapai ambang dan memicu potensial aksi yang merambat sepanjang seraf menuju medula spinalis — inilah awal sensasi panas.',
+keys:[
+ 'TRPV = Transient Receptor Potential Vanilloid; TRPV1 juga diaktifkan kapsaisin (cabai).',
+ 'Kanal TRPV bukan GPCR — transduksinya langsung lewat kanal ion berpintu stimulus.',
+ 'Na+ mendominasi depolarisasi cepat; Ca2+ berperan pada modulasi dan pelepasan transmitter.',
+ 'Potensial aksi "all or none": frekuensinya naik seiring suhu makin panas (kode frekuensi).'
+],
+steps:[
+ {lb:'STIMULUS 40°',ds:'Panas sekitar 40°C menyengat kulit. Energi kalor menyebar melewati epidermis menuju ujung saraf bebas termoreseptor di dermis.',hl:['i-heat'],fx:[['pulse','i-heat']]},
+ {lb:'TERMORESEPTOR',ds:'Ujung saraf bebas (afren) di dermis bertindak sebagai termoreseptor. Membrannya mengandung kanal ion yang pintunya diatur oleh suhu.',hl:['i-term'],fx:[]},
+ {lb:'KANAL TRPV TERBUKA',ds:'Panas mengubah konformasi kanal TRPV (mis. TRPV1/TRPV3/TRPV4) hingga porinya terbuka — gerbang kation kini melayani aliran ion.',hl:['i-ch','i-chlbl'],fx:[['pulse','i-ch']]},
+ {lb:'Na+ & Ca2+ MASUK',ds:'Melalui pori TRPV, ion Na+ dan Ca2+ mengalir masuk mengikuti gradien elektrokimia dari cairan ekstraseluler ke dalam sel saraf.',hl:['i-ionlbl'],fx:[['mv','m3a',{pts:[[262,66],[316,132]],dur:850}],['mv','m3b',{pts:[[382,66],[352,144]],dur:850}]]},
+ {lb:'DEPOLARISASI',ds:'Masuknya kation positif membuat potensial membran naik ke arah positif (depolarisasi) di sekitar ujung saraf — arus penerimaan lahir.',hl:['i-depo'],fx:[['pulse','i-depo']]},
+ {lb:'POTENSIAL AKSI',ds:'Depolarisasi mencapai ambang, kanal Na+ tegangan-tergantung membuka berantai, dan potensial aksi merambat sepanjang seraf menuju medula spinalis.',hl:['i-aplbl','i-spine'],fx:[['mv','m5',{pts:[[352,238],[470,322],[660,424],[826,462]],dur:1600}]]}
+],
+scene(){
+ let epi='';for(let i=0;i<4;i++)epi+=RC(70+i*150,102,130,48,10,'#26325a','#33406e',1.6);
+ let fat='';for(let i=0;i<9;i++)fat+=`<circle cx="${90+i*70}" cy="424" r="12" fill="#1c2745" stroke="#2b375f"/>`;
+ let col='';for(let i=0;i<4;i++)col+=`<path d="M${90+i*170},260 q30,10 60,0 t60,0 t60,0" fill="none" stroke="#22305a" stroke-width="2"/>`;
+ const out=`
+ ${T(52,88,'Epidermis',{a:'start',s:12,f:'#8ea0c9'})}${RC(40,96,700,60,8,'#232e52')}${epi}
+ ${RC(40,156,700,210,8,'#1a2444')}${T(52,176,'Dermis',{a:'start',s:12,f:'#8ea0c9'})}${col}
+ ${RC(40,366,700,114,8,'#151d38')}${T(52,384,'Hipodermis',{a:'start',s:12,f:'#8ea0c9'})}${fat}
+ <g id="i-heat" class="hl" data-step="0">${RC(146,26,18,56,9,'#0b1020','#fca5a5',2)+`<circle cx="155" cy="90" r="13" fill="#f87171"/><line x1="155" y1="40" x2="155" y2="82" stroke="#f87171" stroke-width="4"/>`+'<path d="M205,44 q12,-16 24,0 t24,0" fill="none" stroke="#fb923c" stroke-width="3" stroke-linecap="round"/><path d="M225,70 q12,-16 24,0 t24,0" fill="none" stroke="#fb923c" stroke-width="3" stroke-linecap="round"/><path d="M245,96 q12,-16 24,0 t24,0" fill="none" stroke="#fb923c" stroke-width="3" stroke-linecap="round"/>'+T(330,34,'Stimulus panas ≈ 40°C',{a:'start',s:15,f:'#fca5a5',w:800})+ARW(300,60,330,96,'org',2.5)}</g>
+ <g id="i-term" class="hl" data-step="1"><path d="M900,470 C700,430 480,330 360,220 L332,152" fill="none" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/><path d="M332,152 L318,124 M332,152 L352,120" stroke="#94a3b8" stroke-width="5" stroke-linecap="round" fill="none"/>${T(560,300,'Termoreseptor (ujung saraf bebas)',{a:'start',s:13,f:'#cbd5e1',w:700})+LN(556,304,470,330,'#64748b',1.5)}</g>
+ <g id="i-ch" class="hl" data-step="2">${RC(318,128,28,24,5,'#7f1d1d','#f87171',2)+LN(332,128,332,152,'#fecaca',3)}</g>
+ <g id="i-chlbl" class="hl" data-step="2">${T(296,182,'Kanal TRPV terbuka',{a:'end',s:13,f:'#fca5a5',w:700})+LN(302,178,320,152,'#f87171',1.5)}</g>
+ ${HL(3,T(430,90,'Na+ masuk + Ca2+ masuk',{a:'start',s:13,f:'#fde047',w:700})).replace('class="hl"','id="i-ionlbl" class="hl"')}
+ ${HL(4,EL(345,190,64,28,'none','#34d399',2.5,'6 4')+T(425,168,'Depolarisasi',{a:'start',s:13,f:'#34d399',w:700})).replace('class="hl"','id="i-depo" class="hl"')}
+ ${HL(5,T(600,320,'Potensial aksi merambat',{a:'start',s:13,f:'#fde047',w:700})).replace('class="hl"','id="i-aplbl" class="hl"')}
+ <g id="i-spine" class="hl" data-step="5">${RC(760,420,180,86,14,'#17224a','#3b4a78',2)+T(850,468,'Medula Spinalis',{s:14,f:'#cbd5e1',w:700})+ARW(900,430,930,400,'gry',2)}</g>
+ ${MV('m3a',ION('#fde047','Na+',13,10))}
+ ${MV('m3b',ION('#fb923c','Ca2+',14,9))}
+ ${MV('m5',BOLT())}
+ `;
+ return {w:960,h:540,body:DEFS+out};
+}
+},
+/* ================= 3. JALUR OLFAKTORI ================= */
+{
+id:'olfaktori',num:'03',name:'Jalur Olfaktori',sub:'Transduksi penciuman (GPCR → cAMP)',color:'#4ade80',
+formula:['ODORANT','OLFACTORY GPCR','PROTEIN G','α-GTP AKTIF','ADENYLYL CYCLASE III','ATP → cAMP ↑','KANAL GERAP-cAMP','Ca2+ MASUK','Na+ MASUK','KANAL Cl- (Ca2+)','Cl- KELUAR','DEPOLARISASI','POTENSIAL AKSI'],
+intro:'Molekul odorant mengikat GPCR olfaktori pada silium neuron pencium. Protein G (Golf) diaktifkan: subunit α menukar GDP dengan GTP, lalu mengaktifkan adenylyl cyclase III yang mengubah ATP menjadi cAMP. cAMP membuka kanal kation → Ca2+ dan Na+ masuk. Ca2+ membuka kanal Cl- teraktivasi-Ca2+ dan Cl- justru KELUAR — unik untuk neuron olfaktori — sehingga sel depolarisasi dan menembakkan potensial aksi ke bulus olfaktorius.',
+keys:[
+ 'Neuron olfaktori adalah neuron sejati yang ter-regenerasi (sel punca olfaktori).',
+ 'Kadar Cl- intraseluler neuron penciuman sangat TINGGI (transporter NKCC1), karena itu keluarnya Cl- menimbulkan depolarisasi.',
+ 'cAMP = second messenger utama penciuman; bandingkan dengan cGMP pada penglihatan.',
+ 'Satu jenis reseptor per neuron → pola aktivasi banyak neuron membentuk "peta bau" di glomerulus.'
+],
+steps:[
+ {lb:'ODORANT',ds:'Molekul pewangi (odorant) terbawa udara hingga rongga hidung, melarutkan diri di mukus, dan mencapai silium neuron olfaktori.',hl:['ol-odor'],fx:[['mv','m0',{pts:[[270,44],[336,150]],dur:900}]]},
+ {lb:'OLFACTORY GPCR AKTIF',ds:'Odorant mengikat reseptor olfaktori (GPCR) pada membran silium. Reseptor berubah konformasi dan menangkap protein G di sisi sitoplasma.',hl:['ol-gpcr'],fx:[['pulse','ol-gpcr']]},
+ {lb:'PROTEIN G AKTIF',ds:'GPCR aktif menyebabkan subunit α melepaskan GDP dan mengikat GTP — protein G (Golf) terpecah menjadi α-GTP dan kompleks βγ.',hl:['ol-g'],fx:[]},
+ {lb:'α-GTP AKTIF',ds:'Subunit α-GTP bergerak bebas di dalam sel menuju enzim targetnya — inilah pembawa sinyal ke tahap enzimatik.',hl:['ol-g'],fx:[['mv','m3',{pts:[[735,205],[856,258]],dur:850}]]},
+ {lb:'ADENYLYL CYCLASE III',ds:'α-GTP mengaktifkan adenylyl cyclase III — enzim pembuat cAMP khas penciuman — yang menempel di membran silium.',hl:['ol-ac'],fx:[['pulse','ol-ac']]},
+ {lb:'ATP → cAMP ↑',ds:'Adenylyl cyclase III mengonversi ATP menjadi cAMP. Kadar cAMP sitoplasma melonjak sebagai second messenger.',hl:['ol-camp'],fx:[['mv','m5',{pts:[[800,345],[852,300]],dur:700}]]},
+ {lb:'KANAL GERAP-cAMP TERBUKA',ds:'cAMP mengikat dan membuka kanal kation tergantung-cAMP (CNG) pada membran silium — gerbang ion terbuka lebar.',hl:['ol-cng','ol-cnglbl'],fx:[['pulse','ol-cng']]},
+ {lb:'Ca2+ MASUK',ds:'Ion Ca2+ mengalir masuk dari mukus melalui kanal CNG yang terbuka, menambah muatan positif di dalam sel.',hl:['ol-ca'],fx:[['mv','m7',{pts:[[720,412],[716,370]],dur:700}]]},
+ {lb:'Na+ MASUK',ds:'Bersamaan, ion Na+ juga masuk melalui kanal CNG yang sama — arus depolarisasi makin kuat.',hl:['ol-na'],fx:[['mv','m8',{pts:[[745,414],[732,374]],dur:700}]]},
+ {lb:'KANAL Cl- TERAKTIVASI Ca2+',ds:'Ca2+ yang masuk mengikat kanal Cl- teraktivasi-Ca2+ (anoctamin/TMEM16) dan membukanya — penguat sinyal (amplifikasi) khas sel pencium.',hl:['ol-clch','ol-clchl'],fx:[['pulse','ol-clch']]},
+ {lb:'Cl- KELUAR',ds:'Karena Cl- intraseluler sangat tinggi, Cl- keluar dari sel. Keluarnya anion negatif membuat sel makin POSITIF — depolarisasi tambahan. Fenomena unik neuron olfaktori!',hl:['ol-clout'],fx:[['mv','m10',{pts:[[830,362],[833,405]],dur:700}]]},
+ {lb:'DEPOLARISASI',ds:'Kombinasi Na+, Ca2+ masuk dan Cl- keluar mengangkat potensial membran soma hingga mencapai ambang — depolarisasi penuh.',hl:['ol-depo'],fx:[['pulse','ol-depo']]},
+ {lb:'POTENSIAL AKSI',ds:'Potensial aksi lahir di axon hillock dan merambat sepanjang akson menuju bulus olfaktorius, berakhir di glomerulus untuk diteruskan ke otak.',hl:['ol-glom'],fx:[['mv','m12',{pts:[[345,335],[300,430],[210,470],[150,482]],dur:1400}]]}
+],
+scene(){
+ const out=`
+ ${RC(60,96,560,54,8,'#16294d')}${T(90,128,'Mukus',{a:'start',s:12,f:'#8ea0c9'})}
+ ${RC(60,150,560,84,8,'#1c2f5c')}${LN(60,234,620,234,'#3b4a78',2,'6 5')}
+ ${RC(60,234,560,120,8,'#15203f')}${T(90,258,'Lamina propia',{a:'start',s:11,f:'#5b6b93'})}
+ <g id="ol-odor" class="hl" data-step="0">${`<circle cx="90" cy="60" r="8" fill="#a78bfa"/><circle cx="150" cy="40" r="8" fill="#a78bfa"/><circle cx="210" cy="64" r="8" fill="#a78bfa"/><circle cx="270" cy="44" r="8" fill="#a78bfa"/>`+T(180,22,'Odorant (molekul pewangi)',{s:13,f:'#c4b5fd',w:700})}</g>
+ ${LN(340,234,340,170,'#94a3b8',6)+`<circle cx="340" cy="158" r="14" fill="#223055" stroke="#7dd3fc" stroke-width="2"/>
+ <path d="M340,158 C315,152 295,138 275,124 M340,158 C325,140 315,120 305,104 M340,158 C352,136 356,118 352,100 M340,158 C362,146 382,132 400,122" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>`}
+ <circle cx="340" cy="300" r="30" fill="#223055" stroke="#94a3b8" stroke-width="2"/><circle cx="340" cy="300" r="10" fill="#17224a" stroke="#3b4a78"/>
+ <path d="M340,330 C300,420 220,470 150,486" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linecap="round"/>
+ ${RC(40,430,180,90,14,'#17224a','#3b4a78',2)}<circle cx="130" cy="474" r="26" fill="#10281e" stroke="#4ade80" stroke-width="2"/>
+ ${T(130,536,'Bulus Olfaktorius',{s:12,f:'#86efac',w:700})+T(130,424,'Glomerulus',{s:10,f:'#4ade80'})}
+ <circle cx="770" cy="270" r="150" fill="#0b1327" stroke="#3b4a78" stroke-width="1.5" stroke-dasharray="5 4"/>
+ ${LN(354,150,648,180,'#3b4a78',1.5,'4 4')}${LN(354,166,648,330,'#3b4a78',1.5,'4 4')}
+ ${T(770,148,'Zoom: pucuk dendrit (silium)',{s:12,f:'#6b7694'})}
+ <path d="M650,360 Q770,400 890,360" fill="none" stroke="#94a3b8" stroke-width="4"/>
+ <g id="ol-gpcr" class="hl" data-step="1">${LN(770,380,770,360,'#7dd3fc',4.5)+LN(770,360,758,346,'#7dd3fc',4.5)+LN(770,360,782,346,'#7dd3fc',4.5)+`<circle cx="770" cy="320" r="8" fill="#a78bfa"/>`+T(822,318,'terikat',{a:'start',s:11,f:'#c4b5fd',w:700})+T(770,334,'GPCR olfaktori',{s:12,f:'#7dd3fc',w:700})}</g>
+ <g id="ol-g" class="hl" data-step="2">${`<circle cx="735" cy="205" r="11" fill="#4ade80"/><text x="735" y="209" font-size="10" text-anchor="middle" font-weight="700" fill="#0b1020">α</text><circle cx="760" cy="212" r="9" fill="#60a5fa"/><text x="760" y="216" font-size="8" text-anchor="middle" font-weight="700" fill="#0b1020">β</text><circle cx="783" cy="205" r="9" fill="#60a5fa"/><text x="783" y="209" font-size="8" text-anchor="middle" font-weight="700" fill="#0b1020">γ</text>`+T(770,180,'Protein G (GDP → GTP)',{s:12,f:'#86efac',w:700})}</g>
+ <g id="ol-ac" class="hl" data-step="4">${RC(838,250,44,26,9,'#f472b6')+`<text x="860" y="267" font-size="10" text-anchor="middle" font-weight="800" fill="#0b1020">AC III</text>`+T(852,238,'Adenylyl cyclase III',{s:11.5,f:'#f9a8d4',w:700})+T(860,300,'ATP → cAMP',{s:11,f:'#f9a8d4',w:700})}</g>
+ <g id="ol-camp" class="hl" data-step="5">${`<circle cx="715" cy="296" r="5" fill="#22d3ee"/><circle cx="738" cy="284" r="5" fill="#22d3ee"/><circle cx="760" cy="298" r="5" fill="#22d3ee"/>`+T(735,320,'cAMP ↑',{a:'end',s:12.5,f:'#22d3ee',w:700})}</g>
+ <g id="ol-cng" class="hl" data-step="6">${RC(708,368,24,28,5,'#0b1020','#22d3ee',2.5)}</g>
+ <g id="ol-cnglbl" class="hl" data-step="6">${T(700,345,'Kanal cAMP',{a:'end',s:11.5,f:'#67e8f9',w:700})+LN(702,350,712,364,'#22d3ee',1.5)}</g>
+ <g id="ol-ca" class="hl" data-step="7">${T(660,388,'Ca2+',{a:'end',s:11,f:'#fdba74',w:700})}</g>
+ <g id="ol-na" class="hl" data-step="8">${T(760,392,'Na+',{a:'start',s:11,f:'#fde047',w:700})}</g>
+ <g id="ol-clch" class="hl" data-step="9">${RC(818,366,24,28,5,'#0b1020','#a78bfa',2.5)}</g>
+ <g id="ol-clchl" class="hl" data-step="9">${T(815,340,'Kanal Cl- (aktif Ca2+)',{a:'end',s:11.5,f:'#c4b5fd',w:700})+LN(816,344,824,362,'#a78bfa',1.5)}</g>
+ <g id="ol-clout" class="hl" data-step="10">${T(795,400,'Cl- keluar',{a:'middle',s:11,f:'#c4b5fd',w:700})+ARW(830,378,830,398,'vio',2)}</g>
+ ${HL(11,EL(340,300,44,36,'none','#34d399',2.5,'6 4')+T(415,282,'Depolarisasi',{a:'start',s:12.5,f:'#34d399',w:700})).replace('class="hl"','id="ol-depo" class="hl"')}
+ ${HL(12,EL(130,474,32,32,'none','#4ade80',3)+T(240,430,'Potensial aksi tiba di glomerulus',{a:'start',s:11.5,f:'#86efac',w:700})).replace('class="hl"','id="ol-glom" class="hl"')}
+ ${MV('m0',`<circle r="9" fill="#a78bfa"/>`)}
+ ${MV('m3',ION('#4ade80','α',12,10))}
+ ${MV('m5',ION('#f472b6','ATP',13,8))}
+ ${MV('m7',ION('#fb923c','Ca2+',13,8))}
+ ${MV('m8',ION('#fde047','Na+',12,9))}
+ ${MV('m10',ION('#a78bfa','Cl-',12,8))}
+ ${MV('m12',BOLT())}
+ `;
+ return {w:960,h:540,body:DEFS+out};
+}
+},
+/* ================= 4. JALUR GUSTATORI ================= */
+{
+id:'gustatori',num:'04',name:'Jalur Gustatori',sub:'Rasa manis — sel Tipe II (T1R2+T1R3 → ATP)',color:'#f472b6',
+formula:['TASTANT','SEL TIPE II','T1R2 + T1R3','PROTEIN G','PLCβ2','PIP2 → IP3 + DAG','RESEPTOR IP3 (RE)','Ca2+ KELUAR','TRPM5','Na+ MASUK','DEPOLARISASI','CALHM1/3','ATP → P2X2/P2X3'],
+intro:'Zat manis (tastant) mengikat reseptor GPCR T1R2+T1R3 pada sel rasa Tipe II. α-GTP mengaktifkan PLCβ2 yang memecah PIP2 menjadi IP3 dan DAG. IP3 mengikat reseptornya di retikulum endoplasma sehingga Ca2+ keluar ke sitoplasma; Ca2+ membuka TRPM5, Na+ masuk, sel depolarisasi, dan ATP — bukan glutamat — dilepaskan melalui kanal CALHM1/3 untuk mengikat P2X2/P2X3 pada serabut aferen.',
+keys:[
+ 'Sel Tipe II tidak memakai sinaps klasik: neurotransmiternya adalah ATP lewat kanal CALHM1/3.',
+ 'PLCβ2 → IP3 → Ca2+ dari retikulum endoplasma = jalur second messenger fosfoinositida.',
+ 'TRPM5 dibuka langsung oleh Ca2+ intraseluler (bukan tegangan) — penguat depolarisasi.',
+ 'Protein G pada rasa manis/pahit/umami: gustducin; serabut aferen membaca ATP via P2X2/P2X3.'
+],
+steps:[
+ {lb:'TASTANT',ds:'Molekul gula (tastant) larut dalam air liur, masuk melalui pori kuncup pengecap, dan mencapai membran apikal sel rasa Tipe II.',hl:['g-tast'],fx:[['mv','m0',{pts:[[460,40],[460,150]],dur:900}]]},
+ {lb:'T1R2 + T1R3',ds:'Tastant mengikat reseptor rasa manis T1R2+T1R3 — satu unit GPCR dimer khas sel Tipe II. Reseptor mengalami perubahan konformasi.',hl:['g-t1r'],fx:[['pulse','g-t1r']]},
+ {lb:'PROTEIN G AKTIF',ds:'Reseptor aktif mengaktifkan protein G (gustducin): subunit α menukar GDP dengan GTP dan memisahkan diri dari βγ.',hl:['g-g'],fx:[]},
+ {lb:'PLCβ2 AKTIF',ds:'α-GTP mengaktifkan enzim fosfolipase C beta-2 (PLCβ2) yang menempel pada membran — kaskade fosfoinositida dimulai.',hl:['g-plc'],fx:[['pulse','g-plc']]},
+ {lb:'PIP2 → IP3 + DAG',ds:'PLCβ2 memotong PIP2 membran menjadi dua second messenger: IP3 (larut air) dan DAG (tetap di membran).',hl:['g-pip'],fx:[]},
+ {lb:'IP3 → RESEPTOR IP3 (RE)',ds:'IP3 berdifusi ke retikulum endoplasma dan mengikat reseptor IP3 — kanal Ca2+ gated-ligand di membran RE.',hl:['g-er','g-erlbl'],fx:[['mv','m5',{pts:[[405,302],[455,382]],dur:800}]]},
+ {lb:'Ca2+ KELUAR DARI RE',ds:'Reseptor IP3 terbuka: Ca2+ lepas dari gudang retikulum endoplasma ke sitoplasma — kadar Ca2+ intraseluler melonjak.',hl:['g-ca'],fx:[['pulse','g-ca']]},
+ {lb:'TRPM5 TERBUKA',ds:'Ca2+ mengikat dan membuka kanal TRPM5 pada membran sel — kanal kation yang pintunya dikendalikan Ca2+ intraseluler.',hl:['g-trpm','g-trpmlbl'],fx:[['pulse','g-trpm']]},
+ {lb:'Na+ MASUK',ds:'Melalui TRPM5 yang terbuka, Na+ mengalir masuk dari cairan ekstraseluler — depolarisasi membran menguat.',hl:['g-nalbl'],fx:[['mv','m8',{pts:[[600,316],[542,316]],dur:750}]]},
+ {lb:'DEPOLARISASI',ds:'Potensial membran sel Tipe II naik melampaui ambang — sel kini siap melepaskan sinyal kimianya.',hl:['g-depo'],fx:[['pulse','g-depo']]},
+ {lb:'CALHM1/3 TERBUKA',ds:'Depolarisasi membuka kanal CALHM1/3 (calcium homeostasis modulator) di membran basolateral — jalur keluar ATP.',hl:['g-calh','g-callbl'],fx:[['pulse','g-calh']]},
+ {lb:'ATP KELUAR',ds:'ATP mengalir keluar dari sel melalui pori CALHM1/3 ke ruang sinaptik — bukan lewat vesikel! Inilah keunikan sel rasa Tipe II.',hl:['g-atp'],fx:[['mv','m11a',{pts:[[460,456],[460,494]],dur:700}],['mv','m11b',{pts:[[426,456],[426,498]],dur:700}]]},
+ {lb:'P2X2/P2X3 (AFFEREN)',ds:'ATP mengikat reseptor purinergik P2X2/P2X3 pada serabut aferen saraf fasialis — sinyal rasa manis diteruskan ke otak.',hl:['g-aff'],fx:[['pulse','g-aff']]}
+],
+scene(){
+ const out=`
+ <g id="g-tast" class="hl" data-step="0">${T(340,40,'Tastant (zat rasa manis)',{a:'end',s:13,f:'#f9a8d4',w:700})+ARW(350,44,432,96,'pnk',2)}</g>
+ ${T(300,44,'Rongga mulut',{a:'start',s:13,f:'#8ea0c9',w:700})+LN(240,70,680,70,'#31406e',2)}
+ <polygon points="435,105 485,105 498,70 422,70" fill="#0b1327" stroke="#3b4a78" stroke-width="2"/>
+ ${EL(460,300,150,185,'#101b36','#3b4a78',2.5)}
+ ${LN(450,178,442,58,'#7dd3fc',2)+LN(460,178,460,56,'#7dd3fc',2)+LN(470,178,478,58,'#7dd3fc',2)}
+ ${T(680,22,'Kuncup pengecap (taste bud)',{a:'end',s:12,f:'#6b7694'})}
+ ${RC(390,140,140,290,40,'#11322e','#2f6b5f',2.5)}
+ ${T(326,180,'Sel reseptor Tipe II',{a:'end',s:12,f:'#7fc7b3',w:700})+LN(334,176,392,180,'#2f6b5f',1.5)}
+ <g id="g-t1r" class="hl" data-step="1">${`<circle cx="444" cy="162" r="14" fill="#1f2b52" stroke="#f472b6" stroke-width="2.5"/><circle cx="476" cy="162" r="14" fill="#1f2b52" stroke="#f472b6" stroke-width="2.5"/><text x="444" y="166" font-size="7.5" text-anchor="middle" font-weight="800" fill="#f9a8d4">T1R2</text><text x="476" y="166" font-size="7.5" text-anchor="middle" font-weight="800" fill="#f9a8d4">T1R3</text>`+T(460,192,'reseptor manis (GPCR)',{s:10,f:'#f9a8d4'})}</g>
+ <g id="g-g" class="hl" data-step="2">${`<circle cx="432" cy="222" r="10" fill="#4ade80"/><text x="432" y="226" font-size="9" text-anchor="middle" font-weight="700" fill="#0b1020">α</text><circle cx="456" cy="229" r="8" fill="#60a5fa"/><text x="456" y="232" font-size="7.5" text-anchor="middle" font-weight="700" fill="#0b1020">β</text><circle cx="478" cy="222" r="8" fill="#60a5fa"/><text x="478" y="226" font-size="7.5" text-anchor="middle" font-weight="700" fill="#0b1020">γ</text>`+T(460,250,'Protein G (GDP → GTP)',{s:10.5,f:'#86efac',w:700})}</g>
+ <g id="g-plc" class="hl" data-step="3">${RC(488,268,44,24,8,'#fbbf24')+`<text x="510" y="284" font-size="10" text-anchor="middle" font-weight="800" fill="#0b1020">PLCβ2</text>`}</g>
+ <g id="g-pip" class="hl" data-step="4">${`<circle cx="425" cy="258" r="9" fill="#f472b6"/><text x="425" y="244" font-size="9.5" text-anchor="middle" fill="#f9a8d4" font-weight="700">PIP2</text>`+ARW(420,268,402,290,'pnk',2)+ARW(430,268,446,290,'org',2)+`<circle cx="396" cy="300" r="8" fill="#f87171"/><text x="396" y="318" font-size="9" text-anchor="middle" fill="#fca5a5" font-weight="700">IP3</text><circle cx="452" cy="300" r="8" fill="#fb923c"/><text x="452" y="318" font-size="9" text-anchor="middle" fill="#fdba74" font-weight="700">DAG</text>`}</g>
+ <g id="g-er" class="hl" data-step="5">${RC(440,372,32,16,4,'#0b1020','#f87171',2)+`<text x="456" y="384" font-size="7.5" text-anchor="middle" font-weight="700" fill="#fca5a5">IP3R</text><path d="M400,395 q20,-10 40,0 t40,0 t40,0" fill="none" stroke="#2f6b5f" stroke-width="3" stroke-linecap="round"/><path d="M400,408 q20,-10 40,0 t40,0 t40,0" fill="none" stroke="#2f6b5f" stroke-width="3" stroke-linecap="round"/>`}</g>
+ <g id="g-erlbl" class="hl" data-step="5">${T(460,430,'Retikulum endoplasma + reseptor IP3',{s:9.5,f:'#5eead4',w:700})}</g>
+ <g id="g-ca" class="hl" data-step="6">${`<circle cx="455" cy="352" r="8" fill="#fb923c"/><circle cx="475" cy="344" r="8" fill="#fb923c"/><circle cx="440" cy="346" r="8" fill="#fb923c"/>`+T(460,330,'Ca2+ keluar dari RE',{s:11,f:'#fdba74',w:700})}</g>
+ <g id="g-trpm" class="hl" data-step="7">${RC(519,298,22,32,4,'#0b1020','#4ade80',2.5)}</g>
+ <g id="g-trpmlbl" class="hl" data-step="7">${T(568,294,'TRPM5',{a:'start',s:11.5,f:'#86efac',w:700})+LN(564,298,544,306,'#4ade80',1.5)}</g>
+ <g id="g-nalbl" class="hl" data-step="8">${T(568,340,'Na+ masuk',{a:'start',s:11,f:'#fde047',w:700})}</g>
+ ${HL(9,EL(460,320,72,48,'none','#34d399',2.5,'6 4')+T(360,320,'Depolarisasi',{a:'end',s:12,f:'#34d399',w:700})).replace('class="hl"','id="g-depo" class="hl"')}
+ <g id="g-calh" class="hl" data-step="10">${RC(436,428,48,22,6,'#0b1020','#22d3ee',2.5)}</g>
+ <g id="g-callbl" class="hl" data-step="10">${T(540,446,'CALHM1/3',{a:'start',s:11,f:'#67e8f9',w:700})+LN(536,442,488,440,'#22d3ee',1.5)}</g>
+ <g id="g-atp" class="hl" data-step="11">${T(540,472,'ATP keluar (non-vesikuler)',{a:'start',s:10.5,f:'#f9a8d4',w:700})}</g>
+ <g id="g-aff" class="hl" data-step="12">${`<circle cx="460" cy="506" r="24" fill="#17224a" stroke="#94a3b8" stroke-width="2"/>`+LN(446,492,446,486,'#f9a8d4',2.5)+LN(446,486,442,481,'#f9a8d4',2.5)+LN(446,486,450,481,'#f9a8d4',2.5)+LN(460,490,460,484,'#f9a8d4',2.5)+LN(460,484,456,479,'#f9a8d4',2.5)+LN(460,484,464,479,'#f9a8d4',2.5)+LN(474,492,474,486,'#f9a8d4',2.5)+LN(474,486,470,481,'#f9a8d4',2.5)+LN(474,486,478,481,'#f9a8d4',2.5)+EL(460,496,34,18,'none','#f472b6',2,'5 4')+T(460,538,'Serabut aferen — reseptor P2X2 / P2X3',{s:11,f:'#cbd5e1',w:700})+`<path d="M440,524 C400,534 380,534 360,540" fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>`}</g>
+ ${MV('m0',`<polygon points="0,-13 11,-6.5 11,6.5 0,13 -11,6.5 -11,-6.5" fill="#f472b6"/><text y="4" font-size="7" text-anchor="middle" font-weight="700" fill="#0b1020">GULA</text>`)}
+ ${MV('m5',ION('#f87171','IP3',11,8))}
+ ${MV('m8',ION('#fde047','Na+',12,9))}
+ ${MV('m11a',ION('#f472b6','ATP',13,8))}
+ ${MV('m11b',ION('#f472b6','ATP',13,8))}
+ `;
+ return {w:960,h:540,body:DEFS+out};
+}
+},
+/* ================= 5. JALUR VESTIBULAR ================= */
+{
+id:'vestibular',num:'05',name:'Jalur Vestibular',sub:'Sakulus saat lift naik (kanal MET → glutamat)',color:'#22d3ee',
+formula:['LIFT NAIK','STIMULASI SAKULUS','SEL RAMBUT (INFERIOR STRIOLA)','DEFLEKSI STEREOCILIA → KINOCILIUM','TIP LINKS TEGANG','KANAL MET TERBUKA','K+ MASUK DARI ENDOLIMFE','DEPOLARISASI','VGCC TERBUKA','Ca2+ MASUK','VESIKEL GLUTAMAT → EKSOSITOSIS'],
+intro:'Saat lift berakselerasi naik, membran otolit sakulus tertinggal oleh inersia dan menekan bundel stereosilia sel rambut (inferior dari striola). Defleksi ke arah kinocilium menegangkan tip links dan membuka kanal MET; K+ mengalir masuk dari endolimfe yang kaya K+ berpotensial positif. Sel depolarisasi, VGCC membuka, Ca2+ masuk, dan vesikel glutamat melebur ke membran (eksositosis) untuk menstimulasi serat aferen.',
+keys:[
+ 'Endolimfe kaya K+ dan bermuatan positif (potensial endokoklear ±80 mV) — gaya pendorong K+ masuk.',
+ 'Defleksi TOWARD kinocilium = eksitatori; menjauh = inhibitori (pada sel rambut inferior striola sakulus).',
+ 'Kanal MET = Mechanoelectrical Transduction channel, dibuka langsung oleh tarikan tip link.',
+ 'Eksositosis vesikel glutamat dipicu Ca2+ lewat VGCC — mirip sinaps klasik, di sel rambut vestibular dan koklear.'
+],
+steps:[
+ {lb:'LIFT NAIK',ds:'Lift mulai berakselerasi naik. Kepala (dan lapisan otolit di sakulus ikut bergerak, tetapi membran otolit memiliki massanya sendiri.',hl:['v-lift'],fx:[['pulse','v-lift']]},
+ {lb:'STIMULASI SAKULUS',ds:'Karena inersia, membran otolit tertinggal sejenak relatif terhadap makula — ia menekan bundel rambut di bawahnya. Sakulus terstimulasi.',hl:['v-stim'],fx:[['pulse','v-stim']]},
+ {lb:'SEL RAMBUT (INFERIOR STRIOLA)',ds:'Sel rambut inferior dari striola makula sakulus menerima tekanan tersebut pada puncak stereosiliannya.',hl:['v-cell'],fx:[]},
+ {lb:'DEFLEKSI STEREOCILIA → KINOCILIUM',ds:'Tekanan membengkokkan bundel: stereosilia berdefleksi ke arah kinocilium (silia tertinggi) — arah eksitatori.',hl:['v-defl'],fx:[['show','v-b1'],['hide','v-b0']]},
+ {lb:'TIP LINKS TEGANG',ds:'Defleksi menarik tip links (filamen penghubung antar ujung silia) hingga tegang seperti tali biola.',hl:['v-tlx'],fx:[['pulse','v-tlx']]},
+ {lb:'KANAL MET TERBUKA',ds:'Tarikan tip link membuka kanal MET (Mechanoelectrical Transduction) di puncak stereosilia — gerbang mekanis terbuka.',hl:['v-met','v-metlbl'],fx:[['pulse','v-met']]},
+ {lb:'K+ MASUK DARI ENDOLIMFE',ds:'K+ mengalir masuk dari endolimfe mengikuti gradien elektrokimia raksasa (K+ tinggi + potensial positif endolimfe).',hl:['v-kbl'],fx:[['mv','m6a',{pts:[[540,116],[556,254]],dur:900}],['mv','m6b',{pts:[[572,124],[566,258]],dur:900}]]},
+ {lb:'DEPOLARISASI',ds:'Arus K+ masuk membuat potensial membran sel rambut naik — depolarisasi.',hl:['v-depo'],fx:[['pulse','v-depo']]},
+ {lb:'VGCC TERBUKA',ds:'Depolarisasi membuka kanal Ca2+ tegangan-tergantung (VGCC) pada membran basolateral sel rambut.',hl:['v-vgcc','v-vgcclbl'],fx:[['pulse','v-vgcc']]},
+ {lb:'Ca2+ MASUK',ds:'Ca2+ mengalir masuk melalui VGCC — pemicu langsung proses sekresi di dasar sel.',hl:['v-ca'],fx:[['mv','m9',{pts:[[528,500],[526,430]],dur:700}]]},
+ {lb:'VESIKEL GLUTAMAT → EKSOSITOSIS',ds:'Ca2+ membuat vesikel glutamat melebur ke membran (eksositosis). Glutamat menstimulasi serat aferen vestibular — otak menerima sinyal "lift naik".',hl:['v-ves','v-aff'],fx:[['mv','m10a',{pts:[[535,404],[540,414]],dur:500}],['mv','m10b',{pts:[[540,420],[540,462]],dur:600}]]}
+],
+scene(){
+ const bun=(id,rot,extra)=>{let c='';const xs=[508,521,534,547];const tops=[306,293,280,267];xs.forEach((x,i)=>c+=LN(x,330,x,tops[i],'#cbd5e1',3));let tl='';for(let i=0;i<3;i++)tl+=LN(xs[i],tops[i],xs[i+1],tops[i+1],'#f87171',2);return `<g id="${id}" ${extra} transform="rotate(${rot} 540 330)">${c+LN(560,330,560,250,'#7dd3fc',4)+`<circle cx="560" cy="247" r="5" fill="#7dd3fc"/>`+tl+`<text x="572" y="252" font-size="10" text-anchor="start" fill="#7dd3fc" font-weight="700">kinocilium</text>`}</g>`};
+ const out=`
+ ${RC(200,70,720,130,8,'#0d2438')}${T(240,100,'Endolimfe',{a:'start',s:13,f:'#7dd3fc',w:700})}
+ ${RC(200,200,720,44,8,'#2a4a6e')}${T(700,228,'Membran otolit',{a:'middle',s:12,f:'#cbd5e1',w:700})}
+ ${[260,340,420,580,660,740,820,900].map(x=>`<polygon points="${x},186 ${x+8},194 ${x},202 ${x-8},194" fill="#cbd5e1"/>`).join('')}${T(250,180,'Otokonia',{a:'middle',s:10,f:'#8ea0c9'})}
+ ${RC(200,330,720,90,8,'#223254')}${T(240,360,'Makula sakulus',{a:'start',s:12,f:'#8ea0c9',w:700})}
+ ${RC(400,330,86,90,6,'#1a2748')}${RC(594,330,86,90,6,'#1a2748')}${RC(490,330,100,88,16,'#1d3a2f','#4ade80',2.5)}
+ ${bun('v-b0',0,'')}
+ ${bun('v-b1',14,'class="hl off" data-step="3"')}
+ <g id="v-tlx" class="hl" data-step="4">${LN(508,306,521,293,'#f87171',3.5)+LN(521,293,534,280,'#f87171',3.5)+LN(534,280,547,267,'#f87171',3.5)+T(470,290,'Tip links tegang',{a:'end',s:12,f:'#fca5a5',w:700})}</g>
+ <g id="v-met" class="hl" data-step="5">${RC(556,266,12,16,3,'#450a0a','#f87171',2)}</g>
+ <g id="v-metlbl" class="hl" data-step="5">${T(640,262,'Kanal MET',{a:'start',s:12,f:'#fca5a5',w:700})+LN(636,266,570,272,'#f87171',1.5)}</g>
+ <g id="v-kbl" class="hl" data-step="6">${T(300,170,'K+ masuk dari endolimfe',{a:'start',s:13,f:'#86efac',w:700})+ARW(470,166,520,200,'grn',2.5)}</g>
+ ${HL(7,EL(540,372,66,34,'none','#34d399',2.5,'6 4')+T(625,388,'Depolarisasi',{a:'start',s:12.5,f:'#34d399',w:700})).replace('class="hl"','id="v-depo" class="hl"')}
+ <g id="v-vgcc" class="hl" data-step="8">${RC(516,410,20,16,4,'#0b1020','#fb923c',2.5)}</g>
+ <g id="v-vgcclbl" class="hl" data-step="8">${T(625,416,'VGCC',{a:'start',s:12,f:'#fdba74',w:700})+LN(621,414,538,416,'#fb923c',1.5)}</g>
+ <g id="v-ca" class="hl" data-step="9">${T(590,470,'Ca2+ masuk',{a:'start',s:11.5,f:'#fdba74',w:700})+LN(586,466,532,438,'#fb923c',1.5)}</g>
+ <g id="v-ves" class="hl" data-step="10">${`<circle cx="505" cy="398" r="11" fill="#1f2b52" stroke="#3b4a78" stroke-width="1.5"/><text x="505" y="401" font-size="8" text-anchor="middle" fill="#cbd5e1">Glu</text><circle cx="478" cy="404" r="11" fill="#1f2b52" stroke="#3b4a78" stroke-width="1.5"/><text x="478" y="407" font-size="8" text-anchor="middle" fill="#cbd5e1">Glu</text>`+T(400,440,'Eksositosis glutamat',{a:'start',s:11.5,f:'#86efac',w:700})}</g>
+ <g id="v-aff" class="hl" data-step="10">${`<path d="M540,418 C540,470 580,500 660,505" fill="none" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/>`+T(700,508,'Serat aferen',{a:'start',s:12,f:'#cbd5e1',w:700})}</g>
+ <g id="v-lift" class="hl" data-step="0">${RC(60,150,90,130,10,'#17224a','#3b4a78',2.5)+LN(105,150,105,280,'#3b4a78',2)+ARW(105,120,105,80,'grn',3.5)+T(105,306,'Lift naik',{s:12.5,f:'#86efac',w:700})+ARW(160,180,160,120,'grn',3)}</g>
+ <g id="v-stim" class="hl" data-step="1">${ARW(540,238,540,262,'red',3)+T(945,180,'Otolit menekan bundel (inersia)',{a:'end',s:12.5,f:'#fca5a5',w:700})+LN(838,184,560,224,'#f87171',1.5)}</g>
+ <g id="v-cell" class="hl" data-step="2">${EL(540,374,74,54,'none','#7dd3fc',2,'5 5')+T(760,296,'Stimulasi sakulus',{a:'start',s:12,f:'#cbd5e1',w:700})+T(760,314,'(sel rambut inferior dari striola)',{a:'start',s:10.5,f:'#8ea0c9'})+LN(756,300,616,350,'#475569',1.5)}</g>
+ <g id="v-defl" class="hl" data-step="3">${ARW(590,236,652,204,'amb',2.5)}${T(700,200,'Defleksi ke arah kinocilium',{a:'start',s:12,f:'#fde68a',w:700})}</g>
+ ${MV('m6a',ION('#4ade80','K+',13,10))}
+ ${MV('m6b',ION('#4ade80','K+',13,10))}
+ ${MV('m9',ION('#fb923c','Ca2+',13,8))}
+ ${MV('m10a',`<circle r="11" fill="#1f2b52" stroke="#3b4a78" stroke-width="1.5"/><text y="3" font-size="8" text-anchor="middle" fill="#cbd5e1">Glu</text>`)}
+ ${MV('m10b',`<circle r="6" fill="#34d399"/>`)}
+ `;
+ return {w:960,h:540,body:DEFS+out};
+}
+},
+/* ================= 6. JALUR KOKLEAR ================= */
+{
+id:'koklear',num:'06',name:'Jalur Koklear',sub:'Pendengaran — gelombang suara → eksositosis glutamat',color:'#a78bfa',
+formula:['GELOMBANG SUARA','MEMBRAN TIMPANI','STAPES (M-I-S)','OVAL WINDOW','PERILIMFE','ENDOLIMFE','BASILAR MEMBRANE','TEKTORIAL MEMBRANE','DEFLEKSI STEREOCILIA','TIP LINK TEGANG','KANAL MET TERBUKA','K+ MASUK','DEPOLARISASI','VGCC TERBUKA','Ca2+ MASUK','VESIKEL GLUTAMAT','EKSOSITOSIS'],
+intro:'Gelombang suara menggetarkan membran timpani; rantai malleus–inkus–stapes mendorong jendela oval dan menciptakan gelombang tekanan di perilimfe. Tekanan diteruskan ke endolimfe, membuat membran basilar bergerak, sementara membran tektorial meluncur relatif — keduanya menekuk stereosilia sel rambut ke arah silia tertinggi. Tip link tegang membuka kanal MET, K+ masuk dari endolimfe, sel depolarisasi, VGCC membuka, Ca2+ masuk, dan vesikel glutamat dilepaskan (eksositosis) ke serat aferen koklear.',
+keys:[
+ 'Rantai tulang pendengaran (malleus-inkus-stapes) memperkuat tekanan ±22x dari udara ke cairan.',
+ 'Dua membran yang bergerak relatif: basilar (vertikal) vs tektorial (geser) → defleksi stereosilia.',
+ 'K+ masuk bukan karena pompa, melainkan gradien elektrokimia endolimfe (±80 mV).',
+ 'Frekuensi suara dipetakan ke posisi membran basilar (tonotopi) — puncak getar untuk nada tinggi dekat jendela oval.'
+],
+steps:[
+ {lb:'GELOMBANG SUARA',ds:'Gelombang suara — tekanan udara yang bergetar — masuk melalui saluran pendengaran menuju gendang telinga.',hl:['k-suara'],fx:[['pulse','k-suara']]},
+ {lb:'MEMBRAN TIMPANI',ds:'Gelombang tekanan menggetarkan membran timpani (gendang telinga) — energi udara diubah menjadi getaran mekanis.',hl:['k-tm'],fx:[['pulse','k-tm']]},
+ {lb:'STAPES (M-I-S)',ds:'Getaran diteruskan rantai tulang pendengaran: malleus → inkus → stapes. Tuas ini memperkuat tekanan agar cocok dengan medium cairan.',hl:['k-tulang'],fx:[['pulse','k-tulang']]},
+ {lb:'OVAL WINDOW',ds:'Tapak stapes mendorong jendela oval — pintu masuk gelombang tekanan ke labirin koklea.',hl:['k-oval'],fx:[['pulse','k-oval']]},
+ {lb:'PERILIMFE',ds:'Dorongan jendela oval menciptakan gelombang tekanan di perilimfe skala vestibuli (cairan perikap).',hl:['k-peri'],fx:[['pulse','k-peri']]},
+ {lb:'ENDOLIMFE',ds:'Gelombang tekanan diteruskan melintasi membran ke endolimfe duktus koklearis — ruangan tempat organ pendengaran bekerja.',hl:['k-endo'],fx:[['pulse','k-endo']]},
+ {lb:'BASILAR MEMBRANE',ds:'Tekanan membuat membran basilar bergerak naik-turun; frekuensi suara menentukan titik getar maksimumnya (tonotopi).',hl:['k-bas'],fx:[['pulse','k-bas']]},
+ {lb:'TEKTORIAL MEMBRANE',ds:'Membran tektorial di atasnya bergerak dengan pola berbeda — keduanya bergeser relatif satu sama lain.',hl:['k-tek'],fx:[['pulse','k-tek']]},
+ {lb:'DEFLEKSI STEREOCILIA',ds:'Gerak relatif kedua membran membengkokkan stereosilia sel rambut dalam ke arah silia tertinggi (kinocilium).',hl:['k-defl'],fx:[]},
+ {lb:'TIP LINK TEGANG',ds:'Defleksi menegangkan tip links antar ujung stereosilia.',hl:['k-tip'],fx:[['pulse','k-tip']]},
+ {lb:'KANAL MET TERBUKA',ds:'Tarikan tip link membuka kanal MET di puncak stereosilia.',hl:['k-met','k-metlbl'],fx:[['pulse','k-met']]},
+ {lb:'K+ MASUK',ds:'K+ mengalir masuk dari endolimfe melalui kanal MET, mengikuti gradien elektrokimia endolimfe.',hl:['k-kbl'],fx:[['mv','m11a',{pts:[[616,246],[714,294]],dur:850}],['mv','m11b',{pts:[[630,262],[726,290]],dur:850}]]},
+ {lb:'DEPOLARISASI',ds:'Arus K+ menaikkan potensial membran sel rambut dalam — depolarisasi.',hl:['k-depo'],fx:[['pulse','k-depo']]},
+ {lb:'VGCC TERBUKA',ds:'Depolarisasi membuka kanal Ca2+ tegangan-tergantung (VGCC) di dasar sel.',hl:['k-vgcc'],fx:[['pulse','k-vgcc']]},
+ {lb:'Ca2+ MASUK',ds:'Ca2+ masuk melalui VGCC — pewaktu pelepasan neurotransmitter.',hl:['k-ca'],fx:[['mv','m14',{pts:[[727,352],[725,324]],dur:650}]]},
+ {lb:'VESIKEL GLUTAMAT',ds:'Ca2+ memicu vesikel glutamat bergerak ke membran dasar dan bersiap melebur.',hl:['k-ves'],fx:[['pulse','k-ves']]},
+ {lb:'EKSOSITOSIS',ds:'Vesikel melebur ke membran (eksositosis): glutamat keluar dan menstimulasi serat aferen koklear — sinyal bunyi melaju ke otak.',hl:['k-ekso','k-aff'],fx:[['mv','m16',{pts:[[748,328],[748,366]],dur:650}]]}
+],
+scene(){
+ const out=`
+ ${HL(0,'<path d="M150,185 a42,42 0 0 1 0,60 M180,170 a62,62 0 0 1 0,90 M210,155 a82,82 0 0 1 0,120" fill="none" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round"/>'+T(150,140,'Gelombang suara',{s:13,f:'#7dd3fc',w:700})).replace('class="hl"','id="k-suara" class="hl"')}
+ ${RC(180,190,150,80,10,'#1a2342')}${T(255,296,'Saluran pendengaran',{s:11,f:'#6b7694'})}
+ ${HL(1,`<ellipse cx="336" cy="230" rx="13" ry="44" fill="#3b4a78" stroke="#7dd3fc" stroke-width="2" transform="rotate(-14 336 230)"/>`+T(330,306,'Membran timpani',{s:11.5,f:'#7dd3fc',w:700})).replace('class="hl"','id="k-tm" class="hl"')}
+ ${HL(2,LN(342,222,400,196,'#94a3b8',6)+LN(400,196,452,224,'#94a3b8',6)+LN(452,224,486,212,'#94a3b8',5)+LN(452,224,486,240,'#94a3b8',5)+LN(486,212,486,240,'#cbd5e1',6)+T(400,176,'Malleus → Inkus → Stapes',{s:11.5,f:'#cbd5e1',w:700})).replace('class="hl"','id="k-tulang" class="hl"')}
+ ${HL(3,EL(528,226,12,26,'#223254','#7dd3fc',2.5)+T(528,190,'Jendela oval',{s:11.5,f:'#7dd3fc',w:700})).replace('class="hl"','id="k-oval" class="hl"')}
+ ${RC(560,120,360,300,10,'#0e1730','#3b4a78',2.5)}
+ ${RC(562,122,356,86,0,'#12294d')}${T(912,150,'Perilimfe (skala vestibuli)',{a:'end',s:12,f:'#7dd3fc',w:700})}
+ ${LN(562,208,918,208,'#3b4a78',1.5)}
+ ${RC(562,208,356,118,0,'#1b3a5c')}${T(912,238,'Endolimfe (duktus koklearis)',{a:'end',s:12,f:'#4ade80',w:700})}
+ ${RC(562,326,356,92,0,'#12294d')}${T(912,446,'Perilimfe (skala timpani)',{a:'end',s:11,f:'#7dd3fc'})}
+ ${HL(4,ARW(540,226,604,180,'cyn',3)+'<path d="M620,150 q10,18 0,36 M650,146 q10,22 0,44" fill="none" stroke="#7dd3fc" stroke-width="2"/>').replace('class="hl"','id="k-peri" class="hl"')}
+ ${HL(5,ARW(622,190,622,250,'grn',3)+'<path d="M650,250 q10,16 0,32 M680,246 q10,18 0,36" fill="none" stroke="#4ade80" stroke-width="2"/>').replace('class="hl"','id="k-endo" class="hl"')}
+ ${'<path d="M562,326 Q740,338 918,326" fill="none" stroke="#3b4a78" stroke-width="3"/>'}
+ ${HL(6,'<path d="M562,326 Q740,314 918,326" fill="none" stroke="#fbbf24" stroke-width="3.5"/>'+T(740,352,'Membran basilar bergetar',{s:11.5,f:'#fbbf24',w:700})).replace('class="hl"','id="k-bas" class="hl"')}
+ ${HL(7,RC(640,252,240,40,12,'#2a4a6e')+T(760,244,'Membran tektorial',{s:11.5,f:'#cbd5e1',w:700})).replace('class="hl"','id="k-tek" class="hl"')}
+ ${HL(8,'<polygon points="700,318 760,318 748,292 712,292" fill="#1d3a2f" stroke="#4ade80" stroke-width="2"/>'+LN(716,292,716,272,'#cbd5e1',3)+LN(728,292,728,264,'#cbd5e1',3)+LN(740,292,740,256,'#cbd5e1',3)+ARW(702,268,752,258,'amb',2.5)+T(760,222,'Defleksi ke arah stereosilia tertinggi',{a:'start',s:11,f:'#fde68a',w:700})+T(810,304,'Sel rambut dalam',{a:'start',s:10.5,f:'#86efac',w:700})).replace('class="hl"','id="k-defl" class="hl"')}
+ ${HL(9,LN(716,272,728,264,'#f87171',2.5)+LN(728,264,740,256,'#f87171',2.5)+T(630,306,'Tip link tegang',{a:'end',s:11,f:'#fca5a5',w:700})).replace('class="hl"','id="k-tip" class="hl"')}
+ ${HL(10,RC(730,266,8,12,2,'#450a0a','#f87171',2)+RC(742,258,8,12,2,'#450a0a','#f87171',2)+T(630,290,'Kanal MET',{a:'end',s:11,f:'#fca5a5',w:700})).replace('class="hl"','id="k-met" class="hl"')}
+ <g id="k-metlbl" class="hl" data-step="10">${T(630,274,'MET',{a:'end',s:9,f:'#fca5a5'})}</g>
+ <g id="k-kbl" class="hl" data-step="11">${T(596,222,'K+ masuk',{a:'start',s:11,f:'#86efac',w:700})+LN(610,226,616,240,'#4ade80',1.5)}</g>
+ ${HL(12,EL(730,305,44,22,'none','#34d399',2.5,'5 4')+T(660,336,'Depolarisasi',{a:'end',s:11.5,f:'#34d399',w:700})).replace('class="hl"','id="k-depo" class="hl"')}
+ ${HL(13,RC(716,316,18,14,3,'#0b1020','#fb923c',2.5)+T(830,352,'VGCC',{a:'start',s:11,f:'#fdba74',w:700})+LN(826,349,736,322,'#fb923c',1.5)).replace('class="hl"','id="k-vgcc" class="hl"')}
+ ${HL(14,T(780,376,'Ca2+ masuk',{s:11,f:'#fdba74',w:700})).replace('class="hl"','id="k-ca" class="hl"')}
+ ${HL(15,`<circle cx="748" cy="318" r="10" fill="#1f2b52" stroke="#3b4a78" stroke-width="1.5"/><text x="748" y="321" font-size="8" text-anchor="middle" fill="#cbd5e1">Glu</text>`+T(856,294,'Vesikel Glu',{a:'start',s:10.5,f:'#cbd5e1',w:700})).replace('class="hl"','id="k-ves" class="hl"')}
+ ${HL(16,T(800,398,'Eksositosis',{s:11,f:'#86efac',w:700})).replace('class="hl"','id="k-ekso" class="hl"')}
+ <g id="k-aff" class="hl" data-step="16">${'<path d="M748,328 C748,400 790,430 870,432" fill="none" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/>'+T(876,428,'Serat aferen',{a:'start',s:11.5,f:'#cbd5e1',w:700})}</g>
+ ${MV('m11a',ION('#4ade80','K+',13,10))}
+ ${MV('m11b',ION('#4ade80','K+',13,10))}
+ ${MV('m14',ION('#fb923c','Ca2+',13,8))}
+ ${MV('m16',`<circle r="7" fill="#34d399"/>`)}
+ `;
+ return {w:960,h:540,body:DEFS+out};
+}
+}
+];
+</script>
+<script>
+/* ================= MESIN VISUALISASI ================= */
+const $=s=>document.querySelector(s);
+const stage=$('#stage');
+const PLAY_SVG='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+const PAUSE_SVG='<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
+let cur={pid:null,k:-1,playing:false,speed:1,raf:null,timer:null};
+let P=null,fxIds=new Set(),mvs=[],vmaps=[],initOff={};
+(function(){const st=document.createElement('style');st.textContent='.off{opacity:0 !important}';document.head.appendChild(st)})();
+
+function showView(v){
+ $('#view-home').hidden=v!=='home';
+ $('#view-materi').hidden=v!=='materi';
+ $('#view-kuis').hidden=v!=='kuis';
+ document.querySelectorAll('#tabs .tab').forEach(t=>t.classList.toggle('act',t.dataset.v===v||(t.dataset.p&&v==='materi'&&t.dataset.p===cur.pid)));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function openPathway(id){
+ stopPlay();cur.pid=id;P=PATHWAYS.find(p=>p.id===id);cur.k=-1;
+ document.documentElement.style.setProperty('--pc',P.color);
+ $('#mhNum').textContent=P.num;$('#mhTitle').textContent=P.name;$('#mhSub').textContent=P.sub;
+ $('#iIntro').textContent=P.intro;
+ $('#iKeys').innerHTML=P.keys.map(k=>`<li>${k}</li>`).join('');
+ $('#iFormula').innerHTML=P.formula.map((f,i)=>`<b>${f}</b>${i<P.formula.length-1?'<i>→</i>':''}`).join('');
+ $('#chips').innerHTML=P.steps.map((s,i)=>`<button class="chip" data-i="${i}">${i+1}· ${s.lb}</button>`).join('');
+ $('#pList').innerHTML=P.steps.map((s,i)=>`<li data-i="${i}"><i>${i+1}</i><span>${s.lb}</span></li>`).join('');
+ const sc=P.scene();
+ stage.style.setProperty('--pc',P.color);
+ stage.innerHTML=`<svg viewBox="0 0 ${sc.w} ${sc.h}" role="img" aria-label="Ilustrasi ${P.name}">${sc.body}</svg>`;
+ computeFx();
+ document.querySelectorAll('#chips .chip').forEach(c=>c.onclick=()=>{stopPlay();stepTo(+c.dataset.i,+c.dataset.i>cur.k)});
+ document.querySelectorAll('#pList li').forEach(li=>li.onclick=()=>{stopPlay();stepTo(+li.dataset.i,+li.dataset.i>cur.k)});
+ showView('materi');renderStep(-1,false);
+}
+function computeFx(){
+ fxIds=new Set();mvs=[];vmaps=[];let c={};
+ P.steps.forEach((s,ki)=>{s.fx.forEach(f=>{
+  if(f[0]==='mv'){fxIds.add(f[1]);mvs.push({k:ki,id:f[1],pts:f[2].pts,dur:f[2].dur||800})}
+  else fxIds.add(f[1]);
+  if(f[0]==='show')c[f[1]]=1;if(f[0]==='hide')c[f[1]]=0;
+ });vmaps[ki]={...c}});
+ initOff={};fxIds.forEach(id=>{const el=document.getElementById(id);initOff[id]=el?el.classList.contains('off'):false});
+}
+function applyVis(k){
+ fxIds.forEach(id=>{
+  const el=document.getElementById(id);if(!el||el.classList.contains('mv'))return;
+  const map=k>=0?vmaps[k]:null;
+  const vis=(map&&(id in map))?!!map[id]:!initOff[id];
+  el.classList.toggle('off',!vis);
+ });
+}
+function tween(m){
+ const el=document.getElementById(m.id);if(!el)return;
+ cancelAnimationFrame(cur.raf);
+ const dur=Math.max(350,m.dur/cur.speed);el.style.opacity=1;
+ const t0=performance.now(),segs=[];let tot=0;
+ for(let i=1;i<m.pts.length;i++){segs.push(Math.hypot(m.pts[i][0]-m.pts[i-1][0],m.pts[i][1]-m.pts[i-1][1]));tot+=segs[segs.length-1]}
+ const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+ (function fr(now){
+  const t=Math.min(1,(now-t0)/dur),e=ease(t);let dist=e*tot,pt=m.pts[0];
+  for(let i=0;i<segs.length;i++){if(dist<=segs[i]){const r=segs[i]?dist/segs[i]:0;pt=[m.pts[i][0]+(m.pts[i+1][0]-m.pts[i][0])*r,m.pts[i][1]+(m.pts[i+1][1]-m.pts[i][1])*r];break}dist-=segs[i];pt=m.pts[i+1]}
+  el.setAttribute('transform',`translate(${pt[0]},${pt[1]})`);
+  if(t<1)cur.raf=requestAnimationFrame(fr);
+ })(t0);
+}
+function runFx(k,anim){
+ mvs.forEach(m=>{
+  const el=document.getElementById(m.id);if(!el)return;
+  if(m.k>k){el.style.opacity=0;el.setAttribute('transform','translate(-9999,-9999)');return}
+  if(m.k<k){el.style.opacity=1;const p=m.pts[m.pts.length-1];el.setAttribute('transform',`translate(${p[0]},${p[1]})`);return}
+  if(anim){tween(m)}
+  else{el.style.opacity=1;const p=m.pts[m.pts.length-1];el.setAttribute('transform',`translate(${p[0]},${p[1]})`)}
+ });
+ if(anim&&k>=0)P.steps[k].fx.forEach(f=>{
+  if(f[0]==='pulse'){const el=document.getElementById(f[1]);if(el){el.classList.remove('pg');el.getBoundingClientRect();el.classList.add('pg');setTimeout(()=>el.classList.remove('pg'),950)}}
+ });
+ applyVis(k);
+}
+function renderStep(k,anim){
+ cur.k=k;const n=P.steps.length;
+ document.querySelectorAll('#chips .chip').forEach((c,i)=>{c.classList.toggle('act',i===k);c.classList.toggle('done',i<k)});
+ document.querySelectorAll('#pList li').forEach((li,i)=>{li.classList.toggle('act',i===k);li.classList.toggle('done',i<k)});
+ $('#progBar').style.width=k<0?'0%':`${((k+1)/n)*100}%`;
+ $('#progTxt').textContent=k<0?`0/${n}`:`${k+1}/${n}`;
+ if(k<0){
+  $('#pBadge').textContent='IKHTISAR';
+  $('#pLabel').textContent=`Ikhtisar — ${n} langkah`;
+  $('#pDesc').textContent=P.intro;
+ }else{
+  $('#pBadge').textContent=`LANGKAH ${k+1}/${n}`;
+  $('#pLabel').textContent=P.steps[k].lb;
+  $('#pDesc').textContent=P.steps[k].ds;
+ }
+ stage.querySelectorAll('[data-step]').forEach(el=>{
+  const s=+el.dataset.step;
+  el.classList.toggle('on',s===k);
+  el.classList.toggle('done',s<k);
+ });
+ runFx(k,anim);
+}
+function stepTo(k,anim=true){clearTimeout(cur.timer);if(k>=0&&k<P.steps.length)renderStep(k,anim)}
+function startPlay(){
+ clearTimeout(cur.timer);
+ if(cur.k>=P.steps.length-1)renderStep(0,true);
+ else if(cur.k<0)renderStep(0,true);
+ cur.playing=true;$('#cPlay').innerHTML=PAUSE_SVG;scheduleNext();
+}
+function scheduleNext(){
+ clearTimeout(cur.timer);if(!cur.playing)return;
+ if(cur.k>=P.steps.length-1){stopPlay();return}
+ cur.timer=setTimeout(()=>{renderStep(cur.k+1,true);scheduleNext()},3400/cur.speed);
+}
+function stopPlay(){cur.playing=false;clearTimeout(cur.timer);cancelAnimationFrame(cur.raf);$('#cPlay').innerHTML=PLAY_SVG}
+$('#cPlay').onclick=()=>cur.playing?stopPlay():startPlay();
+$('#cNext').onclick=()=>{stopPlay();if(cur.k<P.steps.length-1)stepTo(cur.k+1,true)};
+$('#cPrev').onclick=()=>{stopPlay();if(cur.k>=0)stepTo(cur.k-1,false)};
+$('#cReset').onclick=()=>{stopPlay();renderStep(-1,false)};
+$('#cSpeed').onclick=()=>{cur.speed=cur.speed===1?1.5:cur.speed===1.5?2:1;$('#cSpeed').textContent=cur.speed+'x'};
+$('#cPlay').innerHTML=PLAY_SVG;
+document.addEventListener('keydown',e=>{
+ if($('#view-materi').hidden)return;
+ if(e.key==='ArrowRight'){stopPlay();if(cur.k<P.steps.length-1)stepTo(cur.k+1,true)}
+ else if(e.key==='ArrowLeft'){stopPlay();if(cur.k>=0)stepTo(cur.k-1,false)}
+ else if(e.key===' '){e.preventDefault();cur.playing?stopPlay():startPlay()}
+});
+/* ================= NAVIGASI & BERANDA ================= */
+function buildUI(){
+ const tabs=$('#tabs');
+ tabs.innerHTML=`<button class="tab" data-v="home"><span class="num">B</span>Beranda</button>`+
+  PATHWAYS.map(p=>`<button class="tab" data-p="${p.id}" data-v="m:${p.id}"><span class="num">${p.num}</span>${p.name}</button>`).join('')+
+  `<button class="tab" data-v="kuis"><span class="num">Q</span>Kuis Evaluasi</button>`;
+ tabs.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  if(t.dataset.p)openPathway(t.dataset.p);
+  else if(t.dataset.v==='kuis')showView('kuis');
+  else showView('home');
+ });
+ $('#homeCards').innerHTML=PATHWAYS.map(p=>`
+  <button class="pcard" data-p="${p.id}" style="--pc:${p.color}">
+   <div class="n">${p.num}</div>
+   <h3>${p.name}</h3><div class="sub">${p.sub}</div>
+   <div class="mini">${p.formula.slice(0,3).map(f=>`<b>${f}</b>`).join('')}<b>…</b></div>
+   <div class="go">Buka materi (${p.steps.length} langkah) →</div>
+  </button>`).join('')+`
+  <button class="qcard" id="goQuiz">
+   <div class="qbadge">Q</div>
+   <div style="flex:1"><h3>Kuis Evaluasi Otomatis</h3>
+   <p>10 soal campuran acak dari keenam jalur — penilaian instan, pembahasan lengkap, skor dan grade otomatis. Tersedia juga kuis cepat 4-5 soal untuk tiap jalur.</p></div>
+  </button>`;
+ document.querySelectorAll('#homeCards .pcard').forEach(c=>c.onclick=()=>openPathway(c.dataset.p));
+ $('#goQuiz').onclick=()=>showView('kuis');
+ $('#mhQuizBtn').onclick=()=>startQuiz(P?P.id:null);
+ $('#miniQuizBtn').onclick=()=>startQuiz(P?P.id:null);
+}
+buildUI();
+</script>
+<script>
+/* ================= KUIS EVALUASI OTOMATIS ================= */
+const QUIZ=[
+{t:"optik",q:"Ketika 11-cis-retinal menyerap foton cahaya, yang terjadi adalah ...",o:["Berubah menjadi all-trans-retinal (isomerisasi)","Berubah menjadi 13-cis-retinal","Terurai menjadi opsin dan vitamin A seketika","Menghidrolisis cGMP menjadi 5'-GMP"],c:0,e:"Fotoisomerisasi 11-cis menjadi all-trans membuat rodopsin berubah menjadi fotopigmen aktif (metarodopsin II). Hidrolisis cGMP terjadi kemudian, setelah PDE aktif."},
+{t:"optik",q:"Protein G khusus yang berperan pada transduksi penglihatan adalah ...",o:["Transducin","Gustducin","Golf","Gq"],c:0,e:"Transducin adalah protein G retina. Gustducin untuk rasa, Golf untuk penciuman, Gq untuk jalur PLC (rasa manis)."},
+{t:"optik",q:"Apa akibat penurunan cGMP terhadap kanal kation pada sel batang?",o:["Kanal menutup sehingga sel hiperpolarisasi","Kanal membuka sehingga sel depolarisasi","Kanal Cl- membuka lebar","Kanal mengalirkan K+ keluar"],c:0,e:"cGMP menjaga kanal kation (Na+/Ca2+) terbuka dalam gelap. Saat cGMP turun, kanal menutup, influx kation berhenti, dan sel hiperpolarisasi."},
+{t:"optik",q:"Respons khas sel fotoreseptor terhadap cahaya adalah ...",o:["Hiperpolarisasi dan pelepasan glutamat menurun","Depolarisasi dan pelepasan glutamat meningkat","Langsung menembakkan potensial aksi","Melepaskan ATP melalui CALHM1/3"],c:0,e:"Penglihatan unik: cahaya menghiperpolarisasi fotoreseptor sehingga pelepasan glutamat JUSTRU berkurang; sel bipolar membacanya sebagai sinyal terang."},
+{t:"integumen",q:"Sesuai materi, suhu stimulus panas yang mengaktifkan termoreseptor kulit adalah sekitar ...",o:["40°C","25°C","60°C","15°C"],c:0,e:"Pada materi ini stimulus panas ±40°C yang membuka kanal TRPV pada ujung saraf bebas."},
+{t:"integumen",q:"Keluarga kanal yang menjadi sensor panas pada ujung saraf bebas kulit adalah ...",o:["TRPV","TRPM5","CALHM1/3","P2X2/P2X3"],c:0,e:"TRPV (Transient Receptor Potential Vanilloid) adalah kanal berpintu suhu. TRPM5 untuk rasa manis, CALHM1/3 kanal ATP, P2X2/3 reseptor purinergik."},
+{t:"integumen",q:"Ion-ion yang masuk melalui kanal TRPV yang terbuka adalah ...",o:["Na+ dan Ca2+","K+ dan Cl-","Cl- saja","Ca2+ keluar dari sel"],c:0,e:"TRPV adalah kanal kation non-selektif: Na+ dan Ca2+ masuk mengikuti gradien elektrokimia, menimbulkan depolarisasi."},
+{t:"integumen",q:"Aliran masuk Na+ dan Ca2+ pada termoreseptor menyebabkan ...",o:["Depolarisasi yang memicu potensial aksi","Hiperpolarisasi seraf","Pelepasan ATP ke kulit","Penurunan cAMP intraseluler"],c:0,e:"Masuknya kation menaikkan potensial membran (depolarisasi); setelah mencapai ambang, potensial aksi merambat ke medula spinalis."},
+{t:"olfaktori",q:"Enzim yang diaktifkan subunit α-GTP pada transduksi penciuman adalah ...",o:["Adenylyl cyclase III","PLCβ2","Fosfodiesterase","Guanylyl cyclase"],c:0,e:"Pada penciuman, α-GTP (Golf) mengaktifkan adenylyl cyclase III untuk membuat cAMP dari ATP. PLCβ2 adalah jalur rasa, PDE jalur penglihatan."},
+{t:"olfaktori",q:"Second messenger utama transduksi penciuman adalah ...",o:["cAMP","cGMP","IP3","NO"],c:0,e:"cAMP membuka kanal kation CNG pada silium neuron olfaktori. cGMP adalah second messenger penglihatan; IP3 jalur rasa manis."},
+{t:"olfaktori",q:"Setelah Ca2+ masuk melalui kanal gerap-cAMP, kanal apa yang berikutnya terbuka?",o:["Kanal Cl- teraktivasi-Ca2+","TRPM5","VGCC","Kanal MET"],c:0,e:"Ca2+ yang masuk membuka kanal Cl- teraktivasi-Ca2+ (anoctamin). TRPM5 ada di sel rasa; VGCC di sel rambut; MET di sel rambut vestibular/koklear."},
+{t:"olfaktori",q:"Mengapa keluarnya Cl- justru menimbulkan DEPOLARISASI pada neuron olfaktori?",o:["Karena kadar Cl- intraselulernya sangat tinggi","Karena Cl- sebenarnya bermuatan positif","Karena mukus bersifat asam","Karena cAMP menghambat pompa Cl-"],c:0,e:"Unik: neuron olfaktori mengakumulasi Cl- (transporter NKCC1). Keluarnya anion negatif menghilangkan muatan negatif intraseluler → membran makin positif = depolarisasi."},
+{t:"gustatori",q:"Reseptor rasa manis pada sel rasa Tipe II berupa ...",o:["GPCR dimer T1R2 + T1R3","Kanal TRPV1","Kanal MET","Reseptor P2X2"],c:0,e:"Rasa manis diikat GPCR heterodimer T1R2+T1R3 pada sel Tipe II. TRPV1 untuk panas, MET untuk mekanosensori, P2X2 reseptor ATP pada serabut aferen."},
+{t:"gustatori",q:"Enzim yang diaktifkan α-GTP pada sel rasa Tipe II adalah ...",o:["PLCβ2","Adenylyl cyclase III","Fosfodiesterase 6","Guanylyl cyclase"],c:0,e:"α-GTP (gustducin) mengaktifkan PLCβ2 yang memotong PIP2 menjadi IP3 + DAG — jalur fosfoinositida khas rasa manis/pahit/umami."},
+{t:"gustatori",q:"PIP2 yang dipotong PLCβ2 menghasilkan ...",o:["IP3 dan DAG","cAMP dan GMP","ATP dan ADP","Na+ dan Ca2+"],c:0,e:"PIP2 dipecah menjadi IP3 (larut air, menuju RE) dan DAG (tetap di membran)."},
+{t:"gustatori",q:"IP3 berikatan dengan reseptornya pada retikulum endoplasma sehingga ...",o:["Ca2+ keluar dari RE ke sitoplasma","Ca2+ masuk dari luar sel","K+ keluar dari sel","Cl- keluar dari sel"],c:0,e:"Reseptor IP3 adalah kanal Ca2+ pada membran retikulum endoplasma; pengikatannya melepas Ca2+ dari gudang intraseluler."},
+{t:"gustatori",q:"Kanal yang dibuka oleh Ca2+ intraseluler agar Na+ masuk pada sel Tipe II adalah ...",o:["TRPM5","TRPV1","CALHM1/3","Kanal gerap-cAMP"],c:0,e:"TRPM5 dibuka langsung oleh Ca2+ intraseluler; Na+ yang masuk memperkuat depolarisasi sel rasa."},
+{t:"gustatori",q:"Sel rasa Tipe II mengomunikasikan sinyal ke serabut aferen melalui ...",o:["ATP via kanal CALHM1/3 menuju P2X2/P2X3","Glutamat menuju reseptor AMPA","Asetilkolin menuju reseptor nikotinik","Serotonin menuju reseptor 5-HT2"],c:0,e:"Keunikan sel Tipe II: ATP keluar lewat CALHM1/3 (non-vesikuler) dan mengikat reseptor purinergik P2X2/P2X3 pada serabut aferen."},
+{t:"vestibular",q:"Saat lift berakselerasi naik, pada sakulus terjadi ...",o:["Membran otolit menekan bundel sehingga stereosilia berdefleksi ke arah kinocilium","Stereosilia berdefleksi menjauhi kinocilium","Endolimfe tersedot ke kanal semisirkular","Kupula bergeser ke samping"],c:0,e:"Inersia membuat membran otolit tertinggal dan menekan bundel rambut; defleksi TOWARD kinocilium pada sel inferior striola bersifat eksitatori."},
+{t:"vestibular",q:"Ion yang masuk ke sel rambut melalui kanal MET berasal dari ...",o:["Endolimfe (kaya K+, bermuatan positif)","Perilimfe (kaya Na+)","Sitoplasma sel pendukung","Mukus olfaktori"],c:0,e:"Endolimfe kaya K+ dan bermuatan ±80 mV — gradien elektrokimia besar mendorong K+ masuk begitu kanal MET terbuka."},
+{t:"vestibular",q:"Depolarisasi sel rambut vestibular membuka kanal ...",o:["VGCC (voltage-gated Ca2+ channel)","TRPM5","Kanal gerap-cAMP","CALHM1/3"],c:0,e:"VGCC pada membran basolateral terbuka karena perubahan tegangan; Ca2+ yang masuk memicu eksositosis vesikel glutamat."},
+{t:"vestibular",q:"Neurotransmitter yang dilepas sel rambut vestibular melalui eksositosis adalah ...",o:["Glutamat","ATP","Dopamin","GABA"],c:0,e:"Sel rambut vestibular dan koklear memakai glutamat dalam vesikel sinaptik (eksositosis tergantung Ca2+). ATP adalah mediator sel rasa Tipe II."},
+{t:"koklear",q:"Urutan tulang pendengaran yang meneruskan getaran menuju jendela oval adalah ...",o:["Malleus → Inkus → Stapes","Stapes → Inkus → Malleus","Inkus → Malleus → Stapes","Malleus → Stapes → Inkus"],c:0,e:"Malleus menempel di membran timpani, meneruskan getaran ke inkus lalu stapes; tapak stapes mendorong jendela oval."},
+{t:"koklear",q:"Defleksi stereosilia sel rambut koklear disebabkan oleh gerak relatif dua membran, yaitu ...",o:["Membran basilar dan membran tektorial","Membran timpani dan jendela oval","Membran Reissner dan membran basilar","Membran tektorial dan jendela bundar"],c:0,e:"Basilar bergerak naik-turun sementara tektorial meluncur relatif; geseran keduanya membengkokkan stereosilia ke arah silia tertinggi."},
+{t:"koklear",q:"K+ dapat memasuki sel rambut koklear dari endolimfe karena ...",o:["Gradien elektrokimia: K+ tinggi dan endolimfe bermuatan positif","Pompa Na+/K+ memompa K+ ke dalam","cAMP membuka kanal K+","Ca2+ menarik K+ secara elektrostatis"],c:0,e:"Endolimfe kaya K+ dan bermuatan ±80 mV. Saat kanal MET terbuka, gradien raksasa ini mendorong K+ masuk tanpa perlu ATP."},
+{t:"koklear",q:"Tujuan akhir eksositosis vesikel glutamat pada sel rambut dalam adalah ...",o:["Menstimulasi serat aferen koklear menuju otak","Menutup kanal MET kembali","Mencairkan membran tektorial","Menaikkan kadar cGMP"],c:0,e:"Ca2+ memicu peleburan vesikel glutamat ke membran; glutamat menstimulasi serat aferen koklear sehingga sinyal bunyi diteruskan ke sistem saraf pusat."}
+];
+let qz={set:[],i:0,score:0,mode:null,answered:false,wrong:[],len:0};
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startQuiz(tag){
+ const base=QUIZ.filter(q=>!tag||q.t===tag);
+ qz.set=shuffle(base.slice()).slice(0,tag?Math.min(5,base.length):Math.min(10,base.length));
+ qz.len=qz.set.length;qz.i=0;qz.score=0;qz.wrong=[];qz.mode=tag?tag:'campuran';
+ showView('kuis');
+ $('#qzIntro').hidden=true;$('#qzResult').hidden=true;$('#qzQuiz').hidden=false;
+ renderQ();
+}
+function renderQ(){
+ qz.answered=false;
+ const q=qz.set[qz.i],pname=PATHWAYS.find(p=>p.id===q.t);
+ $('#qzNo').textContent=`Soal ${qz.i+1}/${qz.len}`;
+ $('#qzTag').textContent=(pname?pname.name:'').toUpperCase();
+ $('#qzBar').style.width=`${(qz.i/qz.len)*100}%`;
+ $('#qzQ').textContent=q.q;
+ $('#qzFb').className='qz-fb';$('#qzNext').hidden=true;
+ const idx=shuffle([0,1,2,3]);
+ $('#qzOpts').innerHTML=idx.map((oi,ix)=>`<button class="qz-opt" data-ok="${oi===q.c?1:0}"><span class="abc">${'ABCD'[ix]}</span><span>${q.o[oi]}</span></button>`).join('');
+ document.querySelectorAll('#qzOpts .qz-opt').forEach(b=>b.onclick=()=>answer(b));
+}
+function answer(btn){
+ if(qz.answered)return;qz.answered=true;
+ const q=qz.set[qz.i],ok=btn.dataset.ok==='1';
+ document.querySelectorAll('#qzOpts .qz-opt').forEach(b=>{
+  b.disabled=true;
+  if(b.dataset.ok==='1')b.classList.add('ok');
+  else if(b===btn)b.classList.add('bad');
+  else b.classList.add('dim');
+ });
+ if(ok)qz.score++;else qz.wrong.push(q);
+ const fb=$('#qzFb');
+ fb.className='qz-fb show '+(ok?'ok':'bad');
+ fb.innerHTML=(ok?'<b>Benar!</b> ':'<b>Belum tepat.</b> ')+q.e;
+ const nx=$('#qzNext');nx.hidden=false;nx.textContent=qz.i<qz.len-1?'Lanjut':'Lihat Hasil';
+}
+$('#qzNext').onclick=()=>{
+ qz.i++;
+ if(qz.i<qz.len)renderQ();else showResult();
+};
+function showResult(){
+ $('#qzQuiz').hidden=true;$('#qzResult').hidden=false;
+ const pct=Math.round(qz.score/qz.len*100);
+ $('#qzScore').textContent=`${qz.score}/${qz.len} — ${pct}%`;
+ let g,ok=pct>=70;
+ if(pct>=90)g='Luar Biasa — Grade A';else if(pct>=80)g='Bagus Sekali — Grade B';
+ else if(pct>=70)g='Cukup Baik — Grade C';else if(pct>=60)g='Perlu Belajar Lagi — Grade D';
+ else g='Remedial — pelajari kembali materinya — Grade E';
+ $('#qzGrade').textContent=g;
+ $('#qzGrade').style.borderColor=ok?'rgba(52,211,153,.45)':'rgba(248,113,113,.45)';
+ $('#qzGrade').style.color=ok?'#a7f3d0':'#fecaca';
+ $('#qzWrong').innerHTML=qz.wrong.length?`<h4>TINJAUAN JAWABAN KELIRU (${qz.wrong.length})</h4>`+qz.wrong.map(w=>{
+  const pname=PATHWAYS.find(p=>p.id===w.t);
+  return `<div class="item"><b>${w.q}</b><br>Jawaban benar: <em>${w.o[w.c]}</em><br>${w.e}${pname?`<br><span style="color:#6b7694">Materi: ${pname.name}</span>`:''}</div>`}).join('')
+  :'<h4>SEMPURNA — tidak ada jawaban keliru.</h4>';
+ try{
+  const best=JSON.parse(localStorage.getItem('biokimia_best')||'null');
+  if(!best||pct>best.pct){localStorage.setItem('biokimia_best',JSON.stringify({pct,score:qz.score,len:qz.len,mode:qz.mode}));$('#qzBest').textContent=`Rekor baru tercatat: ${qz.score}/${qz.len} (${pct}%) — mode ${qz.mode}.`}
+ }catch(e){}
+}
+$('#qzRetry').onclick=()=>startQuiz(qz.mode==='campuran'?null:qz.mode);
+$('#qzHome').onclick=()=>showView('home');
+$('#qzStartAll').onclick=()=>startQuiz(null);
+$('#qzMiniRow').innerHTML=PATHWAYS.map(p=>`<button data-t="${p.id}">${p.name}</button>`).join('');
+document.querySelectorAll('#qzMiniRow button').forEach(b=>b.onclick=()=>startQuiz(b.dataset.t));
+(function(){try{
+ const best=JSON.parse(localStorage.getItem('biokimia_best')||'null');
+ if(best)$('#qzBest').textContent=`Rekor terbaikmu: ${best.score}/${best.len} (${best.pct}%) — mode ${best.mode}.`;
+}catch(e){}})();
+showView('home');
+</script>
+</body>
+</html>
