@@ -1,3 +1,4 @@
+<img width="2048" height="768" alt="image" src="https://github.com/user-attachments/assets/07fda6ab-ae5a-48ad-b8d9-43d7fb085ad4" />
 <div align="center">
 
 # BioSenses
